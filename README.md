@@ -1,14 +1,9 @@
-House Styles Redux
-==================
+Canvas Jigsaw
+=============
 
-Version of the house styles written primarily for standalone front end builds. Key features:
+Prototype of a canvas jigsaw game, put together in a few hours. Can be configured to handle any size of jigsaw with any image, if required.
 
-- browser support for IE7 dropped
-- gulp outputs only what is required for the build to the build/ directory, and deletes it on rebuild.
-- CSS now only uses one stylesheet, containing media queries for tablet and mobile.
-- Directory structure is a bit cleaner.
-- Images should be put in src/static/img/
-- Anything not CSS/JS/images should go in src/static/assets/ e.g. fonts, videos, other files.
+Scales to fit screen on page load, but doesn't yet respond to page resizes. Future work...
 
 
 Use of Gulp

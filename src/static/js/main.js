@@ -56,18 +56,115 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype){
 
 	this.drawPiece = function(){
 		if(this.visible || this.solved){
-			js.ctx.save();
-			js.ctx.beginPath();
-			js.ctx.moveTo(this.x, this.y);
-			js.ctx.lineTo(this.x + this.w,this.y);
-			js.ctx.lineTo(this.x + this.w,this.y + this.h);
-			js.ctx.lineTo(this.x, this.y + this.h);
-			js.ctx.lineTo(this.x, this.y);
-			js.ctx.closePath();
-			js.ctx.clip();
-			js.ctx.drawImage(js.puzzle, 0 - this.solvedx + this.x, 0 - this.solvedy + this.y, js.canvasw, js.canvash);
-			js.ctx.stroke();
-			js.ctx.restore();
+            var arcx = 0;
+            var arcy = 0;
+            var arcradius = 0;
+            var arcstartAngle = 0;
+            var arcendAngle = 0;
+            var arccounterClockwise = true;
+
+            js.ctx.save();
+            js.ctx.beginPath();
+            js.ctx.moveTo(this.x, this.y); //top left corner
+
+            //draw a sticky bit in, top edge
+            if(this.piecetype === 5 || this.piecetype === 7 || this.piecetype === 8 || this.piecetype === 12){
+                arcx = this.x + (this.w / 2);
+                arcy = this.y;
+                arcradius = this.h / 6;
+                arcstartAngle = 1 * Math.PI;
+                arcendAngle = 0 * Math.PI;
+                arccounterClockwise = true;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+            //sticky bit out, top edge
+            if(this.piecetype === 9 || this.piecetype === 6 || this.piecetype === 10 || this.piecetype === 11 || this.piecetype === 13 || this.piecetype === 14){
+                arcx = this.x + (this.w / 2);
+                arcy = this.y;
+                arcradius = this.h / 6;
+                arcstartAngle = 1 * Math.PI;
+                arcendAngle = 0 * Math.PI;
+                arccounterClockwise = false;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+
+            js.ctx.lineTo(this.x + this.w,this.y); //top right corner
+
+            //draw a sticky bit in, right edge
+            if(this.piecetype === 1 || this.piecetype === 3 || this.piecetype === 6 || this.piecetype === 9 || this.piecetype === 11 || this.piecetype === 13){
+                arcx = this.x + this.w;
+                arcy = this.y + (this.h / 2);
+                arcradius = this.h / 6;
+                arcstartAngle = 1.5 * Math.PI;
+                arcendAngle = 0.5 * Math.PI;
+                arccounterClockwise = true;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+            //draw a sticky bit out, right edge
+            if(this.piecetype === 2 || this.piecetype === 5 || this.piecetype === 7 || this.piecetype === 12){
+                arcx = this.x + this.w;
+                arcy = this.y + (this.h / 2);
+                arcradius = this.h / 6;
+                arcstartAngle = 1.5 * Math.PI;
+                arcendAngle = 0.5 * Math.PI;
+                arccounterClockwise = false;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+
+            js.ctx.lineTo(this.x + this.w, this.y + this.h); //bottom right corner
+
+            //draw a sticky bit in, bottom edge
+            if(this.piecetype === 2 || this.piecetype === 5 || this.piecetype === 7 || this.piecetype === 8){
+                arcx = this.x + (this.w / 2);
+                arcy = this.y + this.h;
+                arcradius = this.h / 6;
+                arcstartAngle = 0 * Math.PI;
+                arcendAngle = 1 * Math.PI;
+                arccounterClockwise = true;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+            //sticky bit out, bottom edge
+            if(this.piecetype === 1 || this.piecetype === 3 || this.piecetype === 4 || this.piecetype === 6 || this.piecetype === 9 || this.piecetype === 10){
+                arcx = this.x + (this.w / 2);
+                arcy = this.y + this.h;
+                arcradius = this.h / 6;
+                arcstartAngle = 0 * Math.PI;
+                arcendAngle = 1 * Math.PI;
+                arccounterClockwise = false;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+
+            js.ctx.lineTo(this.x, this.y + this.h); //bottom left corner
+
+            //draw a sticky bit in, left edge
+            if(this.piecetype === 3 || this.piecetype === 4 || this.piecetype === 6 || this.piecetype === 10 || this.piecetype === 13 || this.piecetype === 14){
+                arcx = this.x;
+                arcy = this.y + (this.h / 2);
+                arcradius = this.h / 6;
+                arcstartAngle = 0.5 * Math.PI;
+                arcendAngle = 1.5 * Math.PI;
+                arccounterClockwise = true;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+            //draw a sticky bit out, left edge
+            if(this.piecetype === 2 || this.piecetype === 7 || this.piecetype === 8 || this.piecetype === 12){
+                arcx = this.x;
+                arcy = this.y + (this.h / 2);
+                arcradius = this.h / 6;
+                arcstartAngle = 0.5 * Math.PI;
+                arcendAngle = 1.5 * Math.PI;
+                arccounterClockwise = false;
+                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+            }
+
+            js.ctx.lineTo(this.x, this.y); //top left corner - back to origin
+            js.ctx.closePath();
+            
+            js.ctx.clip();
+            js.ctx.drawImage(js.puzzle, 0 - this.solvedx + this.x, 0 - this.solvedy + this.y, js.canvasw, js.canvash);
+            js.ctx.stroke();
+            js.ctx.restore();
+
 		}
 	};
 }
@@ -82,8 +179,8 @@ var js = {
 	idealw: 1,
 	idealh: 1,
 	canvasmode: 1,
-	piececountx: 5,
-	piececounty: 3,
+	piececountx: 5, //number of pieces across, fixme must be odd number
+	piececounty: 3, //number of pieces down, fixme must be an odd number
 	puzzle: 0,
 	pieces: [],
 	solvedpieces: [],
@@ -187,7 +284,8 @@ var js = {
 		clickPiece: function(x,y){
 			for(var i = 0; i < js.pieces.length; i++){
 				if(js.general.checkCollision(js.pieces[i],x,y)){
-					console.log('found one');
+					//console.log('found one');
+					console.log('Type of piece is',js.pieces[i].piecetype);
 					js.clickedpiece = i;
 					js.general.hideAllPieces();
 					js.pieces[i].visible = 1;
@@ -240,7 +338,6 @@ var js = {
 				js.pieces.splice(js.clickedpiece,1);
 				js.solvedpieces.push(tmp);
 			}
-
 		},
 
 
@@ -271,7 +368,7 @@ var js = {
 		},
 
 		hideAllPieces: function(){
-			console.log('hideAllPieces');
+			//console.log('hideAllPieces');
 			for(var p = 0; p < js.pieces.length; p++){
 				js.pieces[p].visible = 0;
 			}
@@ -284,7 +381,7 @@ var js = {
 
 			for(var y = 0; y < js.piececounty; y++){
 				for(var x = 0; x < js.piececountx; x++){
-					/*
+                    /*
 					var piecex = w * x; //fixme randomise later
 					var piecey = h * y;
 					*/
@@ -294,26 +391,85 @@ var js = {
 					var solvedy = h * y;
 					var spritex = 0;
 					var spritey = 0;
-					if(x === 0 && y === 0){
-						console.log('top left',x,y);
-					}
-					if(x === js.piececountx - 1 && y === 0){
-						console.log('top right',x,y);
-					}
-					if(x === 0 && y === js.piececounty - 1){
-						console.log('bottom left',x,y);
-					}
-					if(x === js.piececountx - 1 && y === js.piececounty - 1){
-						console.log('bottom right',x,y);
-					}
-
 					var piecetype = 0;
+
+                    //FIXME some repetition here
+					if(x === 0){ //left edge
+                        if(y === 0){
+    						piecetype = 1; //top left
+                        }
+                        else if(y === js.piececounty - 1){
+    						piecetype = 11; //bottom left
+                        }
+                        else if(!js.general.isEven(y)){
+                            piecetype = 5; //left edge, type 1
+                        }
+                        else if(js.general.isEven(y)){
+                            piecetype = 9; //left edge, type 2
+                        }
+					}
+					else if(y === 0){ //top edge
+					    if(x === js.piececountx - 1){
+                            piecetype = 4; //top right, fixme repeated below
+                        }
+                        else if(!js.general.isEven(x)){
+                            piecetype = 2; //top edge, type 1
+                        }
+                        else if(js.general.isEven(x)){
+                            piecetype = 3; //top edge, type 2
+                        }
+                    }
+					else if(x === js.piececountx - 1){ //right edge
+                        if(y === 0){
+    						piecetype = 4; //top right
+                        }
+                        else if(y === js.piececounty - 1){
+    						piecetype = 14; //bottom right
+    					}
+    					else if(!js.general.isEven(y)){
+                            piecetype = 8;
+                        }
+                        else if(js.general.isEven(y)){
+                            piecetype = 10;
+                        }
+					}
+					else if(y === js.piececounty - 1){ //bottom edge
+                        if(!js.general.isEven(x)){
+                            piecetype = 12;
+                        }
+                        else {
+                            piecetype = 13;
+                        }
+                    }
+                    else {
+                        if(!js.general.isEven(x)){
+                            if(!js.general.isEven(y)){
+                                piecetype = 6;
+                            }
+                            else {
+                                piecetype = 7;
+                            }
+                        }
+                        else {
+                            if(!js.general.isEven(y)){
+                                piecetype = 7;
+                            }
+                            else {
+                                piecetype = 6;
+                            }
+                        }
+                    }
+
 					var newpiece = new NewPiece(piecex,piecey,w,h,solvedx,solvedy,spritex,spritey,piecetype);
 					js.pieces.push(newpiece);
 				}
 			}
 		},
 		
+        isEven: function(n) {
+            return n % 2 == 0;
+        },
+
 		drawPieces: function(){
 			js.general.clearCanvas();
 			var piececount = js.solvedpieces.length;
@@ -321,11 +477,11 @@ var js = {
 				js.solvedpieces[p].drawPiece();
 			}
 			piececount = js.pieces.length;
-			for(var p = 0; p < piececount; p++){
-				js.pieces[p].drawPiece();
+			for(var q = 0; q < piececount; q++){
+				js.pieces[q].drawPiece();
 			}
 		},
-
+/*
 		drawCanvas: function(){
 			//js.ctx.drawImage(allimages[0].images[0], 0, 0, js.canvasw, js.canvash);
 
@@ -364,8 +520,8 @@ var js = {
 			js.ctx.lineTo(startx, starty + pieceh);
 			js.ctx.lineTo(startx, starty);
 			js.ctx.stroke();
-		}
-
+		};
+*/
 	}
 
 };
