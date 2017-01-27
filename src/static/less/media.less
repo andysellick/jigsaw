@@ -1,0 +1,35 @@
+/* --media objects */
+
+    img, object {
+        max-width:100%;
+    }
+    #map-canvas img { //need to turn this off for google maps, otherwise image corruption occurs
+        max-width: inherit;
+    }
+    
+    a img {
+        border:0;
+    }
+
+    /* useful styles to ensure youtube videos always maintain sensible aspect ratio, wrap iframe in this, set width to 100% and no height attribute */
+    .videomagic {
+    	position: relative;
+    	padding-bottom: 56.25%; /* 16:9 */
+    	padding-top: 25px;
+    	height: 0;
+    	margin:30px 0;
+
+        iframe {
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+        	width: 100%;
+        	height: 100%;
+        }
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+}

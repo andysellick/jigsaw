@@ -1,0 +1,216 @@
+/*== GRID GENERATOR ==*/
+
+/* GRID VARIABLES */
+	@gridWidth: 1024px; //set to maximum page width required
+	@gridSpacing: 20; //spacing between columns required
+	@numCols: 12; //number of columns required
+	@fixedspacing: 20px; //used for fixed spacing grid
+
+	@percentColGutter: percentage(@gridSpacing / @gridWidth);
+	@percentColWidth: percentage(((@gridWidth - (@gridSpacing * (@numCols - 1))) / @numCols) / @gridWidth);
+	@fixedColWidth: percentage((@gridWidth / @numCols) / @gridWidth);
+
+
+/* GRID MIXINS - used to construct the grid */
+	/* indent calculation mixin */
+	.offset(@multiply, @add:0){
+		margin-left:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+	}
+	/* fixed indent calculation mixin */
+	.fixedOffset(@multiply){
+		margin-left:(@fixedColWidth * @multiply);
+	}
+	/* reverse indent - works in reverse, unsurprisingly */
+	.reverseOffset(@multiply, @add:0){
+		margin-right:(@percentColWidth * @multiply) + (@percentColGutter * @multiply) + (@percentColGutter * @add);
+	}
+
+/* base grid styles */
+    /* IE8 will ignore border box when max/min width applied, solution is to create a wrapper for container and give that the max width and margin below */
+    .container {
+        margin:0 auto;
+        padding:0 10px;
+        .border-box();
+        max-width:@gridWidth;
+    }
+    .row {
+        .clearfix;
+        clear:both;
+        [class*="span"] {
+            float:left;
+            margin-left:@percentColGutter;
+            &:first-child {
+                margin-left:0;
+            }
+        }
+
+        /* build all the columns */
+        /* http://blog.thehippo.de/2012/04/programming/do-a-loop-with-less-css/ */
+        @columnIterations: @numCols;
+        .columnLoopingClass(@columnIndex) when (@columnIndex > 0){
+            .span@{columnIndex}{
+                width:@percentColWidth * @columnIndex + (@percentColGutter * (@columnIndex - 1));
+            }
+            .columnLoopingClass(@columnIndex - 1);
+        }
+        .columnLoopingClass(0){}
+        .columnLoopingClass(@columnIterations);
+
+        /* build all the indents - need to use new variables for this loop */
+        @indentIterations: @numCols - 1;
+        .indentLoopingClass(@indentIndex) when (@indentIndex > 0){
+            .offset@{indentIndex}{
+                .offset(@indentIndex,1);
+                &:first-child {
+                    .offset(@indentIndex);
+                }
+            }
+            .indentLoopingClass(@indentIndex - 1);
+        }
+        .indentLoopingClass(0){}
+        .indentLoopingClass(@indentIterations);
+        
+
+        /* fixed column spaced grid for nesting - most projects will not need this */
+        &.fixedspacing {
+            .row {
+                margin-left:-@fixedspacing / 2;
+                margin-right:-@fixedspacing / 2;
+            }
+            [class*="span"] {
+                margin:0;
+                padding-left:@fixedspacing / 2;
+                padding-right:@fixedspacing / 2;
+                .border-box();
+            }
+
+            @fixedIterations: @numCols;
+            .fixedLoopingClass(@fixedIndex) when (@fixedIndex > 0){
+                .span@{fixedIndex}{
+                    width:@fixedColWidth * @fixedIndex; // + (@percentColGutter * (@fixedIndex - 1));
+                }
+                .fixedLoopingClass(@fixedIndex - 1);
+            }
+            .fixedLoopingClass(0){}
+            .fixedLoopingClass(@fixedIterations);
+
+            /* indents */
+            @fixedIndentIterations: @numCols - 1;
+            .fixedIndentLoopingClass(@fixedIndentIndex) when (@fixedIndentIndex > 0){
+                .offset@{fixedIndentIndex}{
+                    .fixedOffset(@fixedIndentIndex);
+                }
+                .fixedIndentLoopingClass(@fixedIndentIndex - 1);
+            }
+            .fixedIndentLoopingClass(0){}
+            .fixedIndentLoopingClass(@fixedIndentIterations);
+        }
+        /* end fixed column spacing */
+
+
+        /* reverse layout for right to left, including indents */
+        &.reverselayout {
+            [class*="span"] {
+                float:right;
+                margin-right:@percentColGutter;
+                margin-left:0;
+                &:first-child {
+                    margin-right:0;
+                }
+            }
+
+            /* indents */
+            @reverseIndentIterations: @numCols - 1;
+            .reverseIndentLoopingClass(@reverseIndentIndex) when (@reverseIndentIndex > 0){
+                .offset@{reverseIndentIndex}{
+                    .reverseOffset(@reverseIndentIndex,1);
+                    &:first-child {
+                        .reverseOffset(@reverseIndentIndex);
+                    }
+                }
+                .reverseIndentLoopingClass(@reverseIndentIndex - 1);
+            }
+            .reverseIndentLoopingClass(0){}
+            .reverseIndentLoopingClass(@reverseIndentIterations);
+
+
+            &.fixedspacing {
+                [class*="span"] {
+                    margin:0;
+                }
+            }
+        }
+        /* end reverse layout */
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+    .row,
+    .row.fixedspacing {
+        [class*="span"] {
+            float:none;
+            width:auto;
+            margin-left:0;
+            padding:0;
+        }
+        [class*="offset"] {
+            margin-left:0;
+            &:first-child {
+                margin-left:0;
+            }
+        }
+        .row {
+            margin:0;
+        }
+        
+        /* non-collapsing grid */
+        &.fix {
+            [class*="span"] {
+                float:left;
+                margin-left:@percentColGutter;
+                &:first-child {
+                    margin-left:0;
+                }
+            }
+            /* build all the columns */
+            @fixIterations: @numCols;
+            .fixLoopingClass(@fixIndex) when (@fixIndex > 0){
+                .span@{fixIndex}{
+                    width:@percentColWidth * @fixIndex + (@percentColGutter * (@fixIndex - 1));
+                }
+                .fixLoopingClass(@fixIndex - 1);
+            }
+            .fixLoopingClass(0){}
+            .fixLoopingClass(@fixIterations);
+            
+            /* build all the indents - need to use new variables for this loop */
+            @indentIterations: @numCols - 1;
+            .indentLoopingClass(@indentIndex) when (@indentIndex > 0){
+                .offset@{indentIndex}{
+                    .offset(@indentIndex,1);
+                    &:first-child {
+                        .offset(@indentIndex);
+                    }
+                }
+                .indentLoopingClass(@indentIndex - 1);
+            }
+            .indentLoopingClass(0){}
+            .indentLoopingClass(@indentIterations);            
+        }
+    }
+    
+    .row.reverselayout {
+        [class*="span"] {
+            float:none;
+            margin:0;
+        }
+        [class*="offset"] {
+            margin-right:0;
+            &:first-child {
+                margin-right:0;
+            }
+        }
+    }
+}

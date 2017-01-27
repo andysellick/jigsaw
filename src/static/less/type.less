@@ -1,0 +1,103 @@
+
+/* --headings */
+    h1,h2,h3,h4,h5,h6,
+    .h1,.h2,.h3,.h4,.h5,.h6 {
+        display:block;
+        margin:0 0 0.5em 0;
+        padding:0;
+        font-weight:normal;
+    }
+    h1,
+    .h1 {
+        .fontcalculate(30);
+    }
+    h2,
+    .h2 {
+        .fontcalculate(26);
+    }
+    h3,
+    .h3 {
+        .fontcalculate(24);
+    }
+    h4,
+    .h4 {
+        .fontcalculate(22);
+    }
+    h5,
+    .h5 {
+        .fontcalculate(20);
+    }
+    h6,
+    .h6 {
+        .fontcalculate(18);
+    }
+
+/* --links */
+
+    a {
+        text-decoration:underline;
+    }
+    a:hover {
+        text-decoration:none;
+    }
+    a:focus {
+    	outline:dotted 1px #000000;
+    }
+
+/* --lists */
+
+    ul.standard {
+        margin:0 0 1em 1.5em;
+        li {
+            padding-bottom:0.5em;
+            list-style:disc;
+        }
+    }
+    ol.standard {
+        margin:0 0 1em 1.5em;
+        li {
+            padding-bottom:0.5em;
+            list-style:decimal;
+        }
+    }
+
+    dl.standard {
+        margin-bottom:0.5em;
+        dt {
+            font-weight:bold;
+        }
+        dd {
+            padding:0 0 0.5em 1em;
+        }
+    }
+
+
+/* --other */
+
+    p {
+        margin:0px;
+        padding:0 0 0.75em 0;
+    }
+    small,
+	.small {
+        font-size:90%;
+    }
+    blockquote {
+    }
+    hr {
+        height:1px;
+        margin:0 0 0.5em 0;
+        border:0;
+        border-top:solid 1px #E7E7E7;
+        clear:both;
+    }
+    code {
+        padding:0 0.3em;
+        font-size:1.2em;
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+}

@@ -1,0 +1,74 @@
+/* --buttons */
+    /* button variables */
+    @btnhorzpadding: 0.5em; /* left and right padding for buttons */
+    @btnfontsize: 1em; /* button font size */
+    @btnlineheight: 1.7em; /* used to control the vertical padding of buttons, should therefore be larger than btnfontsize */
+
+    /* almost! managed to normalise the heights across IEs, FF and everyone else */
+    input.btn {
+        padding-top:0;
+        padding-bottom:0;
+        height:@btnlineheight * 1.04;
+        &.btn-small {
+            height:@btnlineheight / 1.4;
+        }
+    }
+
+    .btn {
+        display:inline-block;
+        padding:0 @btnhorzpadding;
+        line-height:@btnlineheight;
+        margin:0;
+        .border-box();
+        border:0;
+        background:#DDD;
+        color:#666;
+        outline:0;
+        cursor:pointer;
+        text-align:center;
+        text-decoration:none;
+        font-size:@btnfontsize;
+        vertical-align:middle;
+        font-family:Arial,Helvetica;
+        border-collapse:separate; //fix for IE9
+        overflow:visible; //fix for IE7
+
+        &.btn-small {
+            font-size:@btnfontsize * 0.9;
+            line-height:@btnlineheight / 1.2;
+            font-weight:normal;
+        }
+        &.btn-large {
+            font-size:@btnfontsize * 1.4;
+        }
+
+        &:hover {
+            text-decoration:none;
+        }
+        &.btn-block {
+            display:block;
+            width:100%;
+            text-align:left;
+            &.center {
+                text-align:center;
+            }
+        }
+        &[disabled],
+        &.disabled {
+            cursor:default;
+            text-decoration:line-through;
+        }
+
+        &.btn-primary {
+            color:#840100;
+        }
+        &.btn-secondary {
+            color:#2a3189;
+        }
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+}

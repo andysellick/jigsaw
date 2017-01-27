@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--[if lt IE 9]>
+<script src="static/bower_components/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+    <title>Grid test</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
+    <!--
+    <link rel="stylesheet" media="screen and (min-width:0) and (max-width:767px)" href="static/css/styles-tablet.min.css"/>
+    <link rel="stylesheet" media="screen and (min-width:0) and (max-width:420px)" href="static/css/styles-mobile.min.css"/>
+    <! --[if lt IE 8 ]>
+        <link rel="stylesheet" type="text/css" href="static/css/styles-responsive.css"/>
+    <! [endif]-- >
+    -->
+
+    <style>
+        .row [class^="span"] { margin-bottom:5px; background:#EFEFEF; box-shadow:0 0 1px green inset; font-size:12px; }
+        .row [class^="span"] .row [class^="span"] { background:#DDDDDD; }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Grid</h1>
+        <p>The grid is a responsive percentage based grid that uses the same markup and class names as the bootstrap 2.0 grid. This is intentional to support oscar projects if required. The grid is generated in the file grid.less and contains several variables to easily reconfigure the grid if required, e.g. to have a different number of columns.</p>
+        <p>It collapses to a single column below a certain screen width. The first element in a row automatically has no left margin.</p>
+        <p>Below should be a comprehensive test of every grid element. The layout here is based on the default configuration of a 12 column grid. Details of classes and markup are included in the styleguide along with simpler examples.</p>
+
+        <h2>Regular</h2>
+        <p>Classic grid based on percentages within a maximum width page wrapper.</p>
+    </div>
+
+    <div class="row">
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+    </div>
+    <div class="row">
+        <div class="span2">.span2</div>
+        <div class="span2">.span2</div>
+        <div class="span2">.span2</div>
+        <div class="span2">.span2</div>
+        <div class="span2">.span2</div>
+        <div class="span2">.span2</div>
+    </div>
+    <div class="row">
+        <div class="span3">.span3</div>
+        <div class="span3">.span3</div>
+        <div class="span3">.span3</div>
+        <div class="span3">.span3</div>
+    </div>
+    <div class="row">
+        <div class="span4">.span4</div>
+        <div class="span4">.span4</div>
+        <div class="span4">.span4</div>
+    </div>
+    <div class="row">
+        <div class="span5">.span5</div>
+        <div class="span5">.span5</div>
+    </div>
+    <div class="row">
+        <div class="span6">.span6</div>
+        <div class="span6">.span6</div>
+    </div>
+    <div class="row">
+        <div class="span7">.span7</div>
+    </div>
+    <div class="row">
+        <div class="span8">.span8</div>
+    </div>
+    <div class="row">
+        <div class="span9">.span9</div>
+    </div>
+    <div class="row">
+        <div class="span10">.span10</div>
+    </div>
+    <div class="row">
+        <div class="span11">.span11</div>
+    </div>
+    <div class="row">
+        <div class="span12">.span12</div>
+    </div>
+
+    <div class="row">
+        <h2>Grid within grid</h2>
+        <p>Grid within a grid works as normal grid, except that it scales down i.e. any grid column that contains another grid is made up of the same number of columns as the top level grid, as shown.</p>
+    </div>
+
+    <div class="row">
+        <div class="span8">.span8</div>
+        <div class="span4">.span4</div>
+    </div>
+    <div class="row">
+        <div class="span8">
+            <div class="row">
+                <div class="span4">.span4</div>
+                <div class="span4">.span4</div>
+                <div class="span4">.span4</div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="row">
+                <div class="span4">.span4</div>
+                <div class="span4">.span4</div>
+                <div class="span4">.span4</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Indents</h2>
+        <p>The grid also has indent classes that can be applied for more complex layouts.</p>
+    </div>
+
+    <div class="row">
+        <div class="span11 offset1">11</div>
+    </div>
+    <div class="row">
+        <div class="span10 offset2">10</div>
+    </div>
+    <div class="row">
+        <div class="span9 offset3">9</div>
+    </div>
+    <div class="row">
+        <div class="span8 offset4">8</div>
+    </div>
+    <div class="row">
+        <div class="span7 offset5">7</div>
+    </div>
+    <div class="row">
+        <div class="span6 offset6">6</div>
+    </div>
+    <div class="row">
+        <div class="span5 offset7">5</div>
+    </div>
+    <div class="row">
+        <div class="span4 offset8">4</div>
+    </div>
+    <div class="row">
+        <div class="span3 offset9">3</div>
+    </div>
+    <div class="row">
+        <div class="span2 offset10">2</div>
+    </div>
+    <div class="row">
+        <div class="span1 offset11">1</div>
+    </div>
+    
+    <div class="row example">
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+    </div>
+    <!-- span1 offset -->
+    <div class="row example">
+        <div class="span1 offset1">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset2">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset3">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset4">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset5">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset6">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset7">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset8">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset9">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset10">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span1 offset11">.span1</div>
+    </div>
+    
+    <!-- span2 offset -->
+    <div class="row example">
+        <div class="span2 offset1">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset2">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset3">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset4">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset5">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset6">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset7">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset8">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset9">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span2 offset10">.span2</div>
+    </div>
+
+    <!-- span3 offset -->
+    <div class="row example">
+        <div class="span3 offset1">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset2">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset3">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset4">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset5">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset6">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset7">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset8">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span3 offset9">.span3</div>
+    </div>
+    
+    <!-- span4 offset -->
+    <div class="row example">
+        <div class="span4 offset1">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset2">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset3">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset4">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset5">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset6">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset7">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span4 offset8">.span4</div>
+    </div>
+
+    <!-- span5 offsets -->
+    <div class="row example">
+        <div class="span5 offset1">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset2">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset3">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset4">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset5">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset6">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span5 offset7">.span5</div>
+    </div>
+
+    <!-- span6 offsets -->
+    <div class="row example">
+        <div class="span6 offset1">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset2">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset3">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset4">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset5">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset6">.span6</div>
+    </div>
+    
+    <!-- span7 offsets -->
+    <div class="row example">
+        <div class="span7 offset1">.span7</div>
+    </div>
+    <div class="row example">
+        <div class="span7 offset2">.span7</div>
+    </div>
+    <div class="row example">
+        <div class="span7 offset3">.span7</div>
+    </div>
+    <div class="row example">
+        <div class="span7 offset4">.span7</div>
+    </div>
+    <div class="row example">
+        <div class="span7 offset5">.span7</div>
+    </div>
+    
+    <!-- span8 offsets -->
+    <div class="row example">
+        <div class="span8 offset1">.span8</div>
+    </div>
+    <div class="row example">
+        <div class="span8 offset2">.span8</div>
+    </div>
+    <div class="row example">
+        <div class="span8 offset3">.span8</div>
+    </div>
+    <div class="row example">
+        <div class="span8 offset4">.span8</div>
+    </div>
+
+    <!-- span9 offsets -->
+    <div class="row example">
+        <div class="span9 offset1">.span9</div>
+    </div>
+    <div class="row example">
+        <div class="span9 offset2">.span9</div>
+    </div>
+    <div class="row example">
+        <div class="span9 offset3">.span9</div>
+    </div>
+    
+    <!-- span10 offsets -->
+    <div class="row example">
+        <div class="span10 offset1">.span10</div>
+    </div>
+    <div class="row example">
+        <div class="span10 offset2">.span10</div>
+    </div>
+    
+    <!-- span11 offsets -->
+    <div class="row example">
+        <div class="span11 offset1">.span11</div>
+    </div>
+
+
+    <!-- offset combos -->
+    <div class="row example">
+        <div class="span1">.span1</div>
+        <div class="span6 offset2">.span6</div>
+        <div class="span1 offset2">.span1</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset2">.span6</div>
+        <div class="span2 offset2">.span2</div>
+    </div>
+    <div class="row example">
+        <div class="span6 offset1">.span6</div>
+        <div class="span3 offset2">.span3</div>
+    </div>
+    <div class="row example">
+        <div class="span6">.span6</div>
+        <div class="span4 offset2">.span4</div>
+    </div>
+    <div class="row example">
+        <div class="span5">.span5</div>
+        <div class="span5 offset2">.span5</div>
+    </div>
+    <div class="row example">
+        <div class="span4">.span4</div>
+        <div class="span6 offset2">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span3">.span3</div>
+        <div class="span6 offset2">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span2">.span2</div>
+        <div class="span6 offset2">.span6</div>
+    </div>
+    <div class="row example">
+        <div class="span1">.span1</div>
+        <div class="span6 offset2">.span6</div>
+        <div class="span1 offset2">.span1</div>
+    </div>
+
+    <div class="row example">
+        <div class="span3">.span3</div>
+        <div class="span4 offset1">.span3</div>
+        <div class="span3 offset1">.span3</div>
+    </div>
+    
+    <div class="row example">
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+        <div class="span1">.span1</div>
+    </div>
+</div>
+
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--[if lt IE 9 ]> 
+    <script>(function() {$('body').addClass('iex');})();</script>
+    <![endif]-->
+    <script>
+        $(document).ready(function(){
+            $(window).resize(function(){
+                console.log("Window width = " + $(window).width());
+            });
+        });
+    </script>
+
+</body>
+</html>

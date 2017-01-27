@@ -1,0 +1,102 @@
+/* --tabs */
+
+    @tabcolour: #AAAAAA;
+    @tabActive: #CCCCCC;
+
+    .tabwrapper {
+        margin:0 0 1em 0;
+        > .nav {
+            > li {
+                float:left;
+                > a {
+                    display:block;
+                    padding:0.2em 0.5em;
+                    text-decoration:none;
+                    background:@tabcolour;
+                }
+                &.active {
+                    > a {
+                        font-weight:bold;
+                        background:@tabActive;
+                    }
+                }
+            }
+        }
+        .tabpane {
+            display:none;
+            padding:20px;
+            clear:both;
+            background:@tabActive;
+            &.active {
+                display:block;
+            }
+        }
+        
+        &.tabs-left {
+            .clearfix();
+            > .nav {
+                float:left;
+                width:20%;
+                .border-box();
+                > li {
+                    float:none;
+                }
+            }
+            .tabpane {
+                float:left;
+                width:80%;
+                clear:none;
+                .border-box();
+            }
+        }
+        
+        &.tabs-right {
+            .clearfix();
+            > .nav {
+                float:right;
+                width:20%;
+                .border-box();
+                > li {
+                    float:none;
+                }
+            }
+            .tabpane {
+                float:left;
+                width:80%;
+                clear:none;
+                .border-box();
+            }
+        }
+    }
+
+    .no-js {
+        .tabwrapper {
+            .tabpane {
+            }
+        }
+    }
+    
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+    .tabwrapper {
+        > .nav {
+            > li {
+                float:none;
+            }
+        }
+        &.tabs-left,
+        &.tabs-right {
+            > .nav {
+                float:none;
+                width:auto;
+            }
+            .tabpane {
+                float:none;
+                width:auto;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" id="site" class="nojs">
+<head>
+<!--[if lt IE 9]>
+<script src="static/bower_components/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+	<title>styleguide</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="static/assets/styleguide/prism.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
+
+    <style>
+        .nojs #stylenav {position:relative;top:auto;right:auto;margin-bottom:1em;width:auto;}
+        .nojs #shownav {display:none;}
+        #stylenav {position:fixed;bottom:100%;left:0;height:100%;padding:0 5px;background:rgb(221,221,221);background:rgba(221,221,221,0.7);}
+        #stylenav ul {padding:5px;margin:30px 0 0 0;}
+        #stylenav .active {font-style:italic;}
+        #shownav {position:fixed;top:0;left:0;padding:5px;background:#DDDDDD;font-size:80%;text-decoration:none;font-weight:bold;}
+        #grid .row [class^="span"] { margin-bottom:5px; background:#EFEFEF; box-shadow:0 0 1px green inset; }
+        #grid .row [class^="span"] .row [class^="span"] { font-size:90%; background:#DDDDDD; }
+        #grid .row [class^="span"] .row [class^="span"] .row [class^="span"] { background:#EEEEEE; }
+        .fillin {padding:0 0.5em;border:solid 1px #d2488f;background:#d2a5bc;color:#FFFFFF;font-style:italic;}
+        section {padding-bottom:150px;}
+    </style>
+
+    <script>
+        /* we want to remove the nojs class as soon as possible on page load */
+        document.getElementById("site").className = document.getElementById("site").className.replace(/nojs/i,'');
+    </script>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1>styleguide</h1>
+    </div>
+</header>
+
+<main class="main">
+
+	<div id="stylenav">
+		<ul>
+			<li>Basics</li>
+			<li><a href="#overview">Overview</a></li>
+			<li><a href="#typography">Typography</a></li>
+			<li><a href="#grid">Grid</a></li>
+			<li><a href="#forms">Forms</a></li>
+			<li><a href="#tables">Tables</a></li>
+			<li><a href="#buttons">Buttons</a></li>
+			<li><a href="#utility">Utility classes</a></li>
+			<li><a href="#javascript">Plugins and JS</a></li>
+			<li>Specific elements</li>
+			<li><a href="#alerts">Alerts</a></li>
+			<li><a href="#tabs">Tabs</a></li>
+			<li><a href="#popups">Popups</a></li>
+			<li><a href="#all">Show all</a></li>
+		</ul>
+	</div>
+	<a href="#" id="shownav">Show menu</a>
+
+	<div id="stylesections">
+		<section id="overview">
+		    <div class="container">
+				<h2>Overview</h2>
+				<p>CSS is written in LESS.</p>
+				<p>LESS is located <span class="fillin">here</span></p>
+				<p>Browser support is included for <span class="fillin">IE9 and above</span>.</p>
+				
+				<h3>Responsiveness</h3>
+				<p><span class="fillin">Notes on any responsiveness e.g. is there some, what devices, where is responsive CSS</span></p>
+				<p>Responsive styles are included in the main stylesheet using media queries, with variables to control breakpoints. </p>
+				
+				<h3>Additional</h3>
+				<p><span class="fillin">Any other relevant notes e.g. if compiled CSS is not included in repo or output on page load</span></p>
+			</div>
+		</section>
+
+		<section id="typography">
+		    <div class="container">
+				<h2>Typography</h2>
+				<hr/>				
+				<h3>Headings</h3>				
+				<span class="h1">Heading 1</span>
+				<span class="h2">Heading 2</span>
+				<span class="h3">Heading 3</span>
+				<span class="h4">Heading 4</span>
+				<span class="h5">Heading 5</span>
+				<span class="h6">Heading 6</span>
+				<p>Note that the appearance of headings can be created using the faux classes as shown above, e.g.<code>.h1</code>.</p>
+				<p>This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a paragraph of text. This is a <a href="#">link example</a>.</p>
+				<p><small>This is smalltext. This is smalltext. This is smalltext.</small></p>
+				<p>This paragraph demonstrates <strong>strong</strong>, <em>italic</em>.</p>
+				<hr/>							
+				<h3>Lists</h3>
+				<ul>
+					<li>This is an unstyled ul</li>
+					<li>This is an unstyled ul</li>
+				</ul>
+				<ul class="standard">
+					<li>This is a <code>.standard</code> ul</li>
+					<li>This is a <code>.standard</code> ul</li>
+				</ul>
+				<ol>
+					<li>This is an unstyled ol</li>
+					<li>This is an unstyled ol</li>
+				</ol>
+				<ol class="standard">
+					<li>This is a <code>.standard</code> ol</li>
+					<li>This is a <code>.standard</code> ol</li>
+				</ol>
+				<dl>
+					<dt>definition list dt</dt>
+					<dd>definition list dd</dd>
+				</dl>
+				<dl class="standard">
+					<dt>This is a <code>.standard</code> dl</dt>
+					<dd>This is a <code>.standard</code> dl</dd>
+					<dt>This is a <code>.standard</code> dl</dt>
+					<dd>This is a <code>.standard</code> dl</dd>
+				</dl>
+				<hr/>				
+				<h3>Blockquotes</h3>
+				<blockquote>
+					<p>This is a blockquote</p>
+					<cite>Citation</cite>
+				</blockquote>
+			</div>
+		</section>
+
+
+		<section id="grid">
+		    <div class="container">
+				<h2>Grid</h2>
+				<p>The grid is a responsive percentage based grid that uses the same markup and class names as the bootstrap 2.0 grid. This is intentional to support oscar projects if required. The grid is generated in the file grid.less and contains several variables to easily reconfigure the grid if required, e.g. to have a different number of columns.</p>
+				<p>It collapses to a single column below a certain screen width. The first element in a row automatically has no left margin. See the <a href="_grid.html">grid test file</a> for a full grid layout.</p>
+				<div class="row">
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+				</div>
+				<div class="row">
+					<div class="span2">.span2</div>
+					<div class="span2">.span2</div>
+					<div class="span2">.span2</div>
+					<div class="span2">.span2</div>
+					<div class="span2">.span2</div>
+					<div class="span2">.span2</div>
+				</div>
+				<div class="row">
+					<div class="span3">.span3</div>
+					<div class="span3">.span3</div>
+					<div class="span3">.span3</div>
+					<div class="span3">.span3</div>
+				</div>
+				<div class="row">
+					<div class="span4">.span4</div>
+					<div class="span4">.span4</div>
+					<div class="span4">.span4</div>
+				</div>
+				<div class="row">
+					<div class="span5">.span5</div>
+					<div class="span5">.span5</div>
+				</div>
+				<div class="row">
+					<div class="span6">.span6</div>
+					<div class="span6">.span6</div>
+				</div>
+				<div class="row">
+					<div class="span7">.span7</div>
+				</div>
+				<div class="row">
+					<div class="span8">.span8</div>
+				</div>
+				<div class="row">
+					<div class="span9">.span9</div>
+				</div>
+				<div class="row">
+					<div class="span10">.span10</div>
+				</div>
+				<div class="row">
+					<div class="span11">.span11</div>
+				</div>
+				<div class="row">
+					<div class="span12">.span12</div>
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span1"&gt;.span1&lt;/div&gt;
+    &lt;div class="span2"&gt;.span2&lt;/div&gt;
+    &lt;div class="span3"&gt;.span3&lt;/div&gt;
+    &lt;div class="span4"&gt;.span4&lt;/div&gt;
+    &lt;div class="span5"&gt;.span5&lt;/div&gt;
+    &lt;div class="span6"&gt;.span6&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h2>Indents</h2>
+				<p>The grid also has indent classes that can be applied for more complex layouts.</p>
+				<div class="row example">
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+					<div class="span1">.span1</div>
+				</div>
+				<!-- span1 indent -->
+				<div class="row">
+					<div class="span11 offset1">11</div>
+				</div>
+				<div class="row">
+					<div class="span10 offset2">10</div>
+				</div>
+				<div class="row">
+					<div class="span9 offset3">9</div>
+				</div>
+				<div class="row">
+					<div class="span8 offset4">8</div>
+				</div>
+				<div class="row">
+					<div class="span7 offset5">7</div>
+				</div>
+				<div class="row">
+					<div class="span6 offset6">6</div>
+				</div>
+				<div class="row">
+					<div class="span5 offset7">5</div>
+				</div>
+				<div class="row">
+					<div class="span4 offset8">4</div>
+				</div>
+				<div class="row">
+					<div class="span3 offset9">3</div>
+				</div>
+				<div class="row">
+					<div class="span2 offset10">2</div>
+				</div>
+				<div class="row">
+					<div class="span1 offset11">1</div>
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span1 offset1"&gt;.span1&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h2>Grid within grid</h2>
+				<p>Grid within a grid works as normal grid, except that it scales down i.e. any grid column that contains another grid is made up of the same number columns as the top level grid, as shown.</p>
+
+				<div class="row">
+					<div class="span8">.span8</div>
+					<div class="span4">.span4</div>
+				</div>
+				<div class="row">
+					<div class="span8">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span8">
+						<div class="row">
+							<div class="span4">
+								<div class="row">
+									<div class="span6">.span6</div>
+									<div class="span6">.span6</div>
+								</div>
+							</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row"&gt;
+    &lt;div class="span8"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span8"&gt;.span8&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+            &lt;div class="span4"&gt;.span4&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h2>Grid within grid, fixed spacing</h2>
+				<p>The grid is based on percentages, including the space between grid columns. This means that a grid row within a grid row will have a narrower gap between columns because the same percentage of a narrower column is smaller (see above example).</p>
+				<p>For grids that must maintain a fixed column spacing, the <code>.fixedspacing</code> class can be applied to the parent grid row. This will ensure that the spacing between columns remains consistent even for nested grids.</p>
+				<p>This approach is considerably more limiting as the fixed column spacing must be split between the left and right of each column, meaning that the first left column will not align perfectly left as in the regular grid. e.g. if the column spacing is 20px, each column receives 10px of padding to the left and right.</p>
+				<p>Grid indents can also be applied to the fixed spaced grid as normal.</p>
+
+				<div class="row fixedspacing">
+					<div class="span8">.span8</div>
+					<div class="span4">.span4</div>
+				</div>
+				<div class="row fixedspacing">
+					<div class="span8">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span1">.span1</div>
+							<div class="span3">.span3</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+				</div>
+				<div class="row fixedspacing">
+					<div class="span8">
+						<div class="row">
+							<div class="span4">
+								<div class="row">
+									<div class="span6">.span6</div>
+									<div class="span6">.span6</div>
+								</div>
+							</div>
+							<div class="span4">.span4</div>
+							<div class="span3 offset1">.span3 .offset1</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="row">
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+							<div class="span4">.span4</div>
+						</div>
+					</div>
+				</div>
+
+				<h2>Reverse layout</h2>
+				<p>When collapsed into a single column the grid translates left to right into top to bottom, meaning that the first column in a row will appear above the second column, and so forth.</p>
+				<p>For some layouts, this approach is not suited. Where this approach should be reversed, apply the <code>.reverselayout</code> class to the parent row, and reverse the order of the elements in the page, as shown.</p>
+				<p>Reverse layout can also be applied to the fixed spaced grid.</p>
+
+				<div class="row reverselayout">
+					<div class="span4">
+						<p>This column appears on the right at full size, but first when collapsed.</p>
+					</div>
+					<div class="span4">
+						<p>This column occurs in the middle.</p>
+					</div>
+					<div class="span4">
+						<p>This column appears on the left at full size, but last when collapsed.</p>
+					</div>
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="row reverselayout"&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column appears on the right at full size, but first when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column occurs in the middle.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="span4"&gt;
+        &lt;p&gt;This column appears on the left at full size, but last when collapsed.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h2>Non-collapsing grid</h2>
+				<p>Occasionally it can be useful to have grid elements that do not collapse with the rest of the grid on a narrow screen. To achieve this add the class of <code>.fix</code> to the <code>row</code> element you do not wish to collapse.</p>
+				
+				<div class="row fix">
+					<div class="span6">
+						This row
+					</div>
+					<div class="span6">
+						will never collapse
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section id="forms">
+		    <div class="container">
+				<h2>Forms</h2>
+				<p>Form styles are controlled through the <code>.form</code> parent class on a form.</p>
+
+				<h3>Regular inputs</h3>
+				<form class="form" action="POST">
+					<fieldset>
+						<div class="field">
+							<label for="text1">This is a text field</label>
+							<input type="text" id="text1"/>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field">
+							<label for="textarea1">This is a textarea</label>
+							<textarea id="textarea1"></textarea>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field">
+							<label for="select1">This is a select</label>
+							<select id="select1">
+								<option>Please choose</option>
+								<option>Option 1</option>
+								<option>Option 2</option>
+							</select>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field">
+							<label for="selectm1">This is a select multiple</label>
+							<select id="selectm1" multiple>
+								<option>Option 1</option>
+								<option>Option 2</option>
+								<option>Option 3</option>
+								<option>Option 4</option>
+								<option>Option 5</option>
+							</select>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field">
+							<label for="file1">This is a file input</label>
+							<input type="file" id="file1"/>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+						
+						<div class="buttons">
+							<button type="submit" class="btn">Submit</button>
+						</div>
+					</fieldset>
+				</form>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="field"&gt;
+    &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h3>Regular inputs with error states</h3>
+				<p>Add the <code>.required</code> class to a field to make it required. Add the <code>.error</code> class to a field for error states.</p>
+
+				<form class="form" action="POST">
+					<fieldset>
+						<div class="field error required">
+							<label for="text2">This is a text field</label>
+							<input type="text" id="text2"/>
+							<span class="errormsg">This field is required</span>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field error required">
+							<label for="textarea2">This is a textarea</label>
+							<textarea id="textarea2"></textarea>
+							<span class="errormsg">This field is required</span>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field error required">
+							<label for="select2">This is a select</label>
+							<select id="select2">
+								<option>Please choose</option>
+								<option>Option 1</option>
+								<option>Option 2</option>
+							</select>
+							<span class="errormsg">This field is required</span>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field error required">
+							<label for="selectm2">This is a select multiple</label>
+							<select id="selectm2" multiple>
+								<option>Option 1</option>
+								<option>Option 2</option>
+								<option>Option 3</option>
+								<option>Option 4</option>
+								<option>Option 5</option>
+							</select>
+							<span class="errormsg">This field is required</span>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="field error required">
+							<label for="file2">This is a file input</label>
+							<input type="file" id="file2"/>
+							<span class="errormsg">This field is required</span>
+							<span class="helptext">This is some help text that has been put here to be helpful</span>
+						</div>
+
+						<div class="buttons">
+							<button type="submit" class="btn">Submit</button>
+						</div>
+					</fieldset>
+				</form>
+				
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="field error"&gt;
+    &lt;label for="text1"&gt;This is a text field&lt;/label&gt;
+    &lt;input type="text" id="text1"/&gt;
+    &lt;span class="errormsg"&gt;This field is required&lt;/span&gt;
+    &lt;span class="helptext"&gt;This is some help text that has been put here to be helpful&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+
+				<h3>Checkboxes</h3>
+				<p>Checkboxes and radio buttons are controlled by the same parent class, plus additional classes for layout variations. Note also that the layouts allow for both input in the label and input beside the label (input beside will only work for single input per field).</p>
+
+				<form class="form" action="POST">
+					<fieldset>
+						<!-- checkbox -->
+						<div class="field radiocheck">
+							<label for="cb1">This is a checkbox</label>
+							<input type="checkbox" id="cb1"/>
+						</div>
+						<div class="field radiocheck">
+							<label>
+								<input type="checkbox" id="cb2"/>
+								This is a checkbox where the input is inside the label
+							</label>
+						</div>
+						<div class="field radiocheck error">
+							<label for="cb3">This is a checkbox with an error</label>
+							<input type="checkbox" id="cb3"/>
+							<span class="errormsg">This field is required</span>
+						</div>
+						<div class="field radiocheck horizontal error">
+							<span class="label">Are these checkboxes?</span>
+							<span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
+							<label><input type="checkbox" name="cb4"/>Yes</label>
+							<label><input type="checkbox" name="cb5"/>No</label>
+							<label><input type="checkbox" name="cb6"/>Maybe</label>
+						</div>
+					</fieldset>
+					
+					<h3>Radio buttons</h3>
+
+					<fieldset>
+						<!-- radio -->
+						<div class="field radiocheck error">
+							<span class="label">These are some radio buttons</span>
+							<label><input type="radio" name="rad1"/>This is a radio button</label>
+							<label><input type="radio" name="rad1"/>This is a radio button</label>
+							<label><input type="radio" name="rad1"/>This is a radio button</label>
+							<span class="errormsg">This field is required</span>
+						</div>
+						<div class="field radiocheck horizontal error">
+							<span class="label">Are these radio buttons?</span>
+							<span class="helptext">The additional class of <code>.horizontal</code> is applied here. This might only work where the label text is short</span>
+							<label><input type="radio" name="rad2"/>Yes</label>
+							<label><input type="radio" name="rad2"/>No</label>
+							<label><input type="radio" name="rad2"/>Maybe</label>
+						</div>
+
+					</fieldset>
+				</form>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;form class="form" action=""&gt;
+    &lt;fieldset&gt;
+        &lt;div class="field"&gt;
+            &lt;label for="text"&gt;Text field&lt;/label&gt;
+            &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
+            &lt;input type="text" id="text"/&gt;
+            &lt;span class="errormsg"&gt;Error, only visible if parent has error class&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="field error"&gt;
+            &lt;label for="text"&gt;Text field&lt;/label&gt;
+            &lt;span class="helptext"&gt;Help text, optional&lt;/span&gt;
+            &lt;input type="text" id="text"/&gt;
+            &lt;span class="errormsg"&gt;Error, only visible if parent has error class&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+			</div>
+		</section>
+
+
+		<section id="tables">
+		    <div class="container">
+				<h2>Tables</h2>
+				<p>Tables are controlled through the <code>.table</code> class.</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Table heading</th>
+							<th>Table heading</th>
+							<th>Table heading</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Table cell</td>
+							<td>Table cell</td>
+							<td>Table cell</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+                
+
+		<section id="buttons">
+		    <div class="container">
+				<h2>Buttons</h2>
+				<p>Buttons are controlled through the <code>.btn</code> class, with additional classes to control the appearance and size.</p>
+				<p>Buttons should look exactly the same for any reasonable element type they are applied to, although there seems to be an inherent difficulty in making <code>input</code> elements match the height of the other elements cross-browser. It is therefore recommended that only <code>a</code> and <code>button</code> are used for buttons.</p>
+				<p>Basic styles:</p>
+				<ul class="standard">
+					<li><code>.btn-primary</code></li>
+					<li><code>.btn-secondary</code></li>
+				</ul>
+
+				<p>Additional button styles:</p>
+				<ul class="standard">
+					<li><code>.disabled</code></li>
+					<li><code>.btn-small</code></li>
+					<li><code>.btn-large</code></li>
+					<li><code>.btn-block</code> (full width)</li>
+				</ul>
+
+				<table class="table">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Example</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							btn
+						</td>
+						<td>
+							<a href="#" class="btn btn-small">Link</a>
+							<button type="submit" class="btn btn-small">Button</button>
+							<button type="submit" class="btn btn-small" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn">Link</a>
+							<button type="submit" class="btn">Button</button>
+							<button type="submit" class="btn" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn btn-large">Link</a>
+							<button type="submit" class="btn btn-large">Button</button>
+							<button type="submit" class="btn btn-large" disabled="disabled">Disabled</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							btn-primary
+						</td>
+						<td>
+							<a href="#" class="btn btn-primary btn-small">Link</a>
+							<button type="submit" class="btn btn-primary btn-small">Button</button>
+							<button type="submit" class="btn btn-primary btn-small" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn btn-primary">Link</a>
+							<button type="submit" class="btn btn-primary">Button</button>
+							<button type="submit" class="btn btn-primary" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn btn-primary btn-large">Link</a>
+							<button type="submit" class="btn btn-primary btn-large">Button</button>
+							<button type="submit" class="btn btn-primary btn-large" disabled="disabled">Disabled</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							btn-secondary
+						</td>
+						<td>
+							<a href="#" class="btn btn-secondary btn-small">Link</a>
+							<button type="submit" class="btn btn-secondary btn-small">Button</button>
+							<button type="submit" class="btn btn-secondary btn-small" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn btn-secondary">Link</a>
+							<button type="submit" class="btn btn-secondary">Button</button>
+							<button type="submit" class="btn btn-secondary" disabled="disabled">Disabled</button>
+
+							<a href="#" class="btn btn-secondary btn-large">Link</a>
+							<button type="submit" class="btn btn-secondary btn-large">Button</button>
+							<button type="submit" class="btn btn-secondary btn-large" disabled="disabled">Disabled</button>
+						</td>
+					</tr>
+				</tbody>
+				</table>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;a href="#" class="btn btn-primary btn-large"&gt;Button&lt;/a&gt;
+</code></pre>
+
+				<h2>Button groups</h2>
+
+				<div class="btn-group">
+					<a class="btn btn-small dropdown-toggle" href="#">Action</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Link</a></li>
+						<li><a href="#">Link</a></li>
+						<li><a href="#">Link</a></li>
+					</ul>
+				</div>
+
+				<div class="btn-group">
+					<a class="btn dropdown-toggle" href="#">Action</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Link</a></li>
+						<li><a href="#">Link</a></li>
+						<li><a href="#">Link</a></li>
+					</ul>
+				</div>
+
+				<div class="btn-group">
+					<a class="btn btn-large dropdown-toggle" href="#">Action</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Another link</a></li>
+						<li><a href="#">Another link</a></li>
+						<li><a href="#">Another link</a></li>
+					</ul>
+				</div>
+
+				<div class="btn-group">
+					<a class="btn btn-large" href="#">Action</a>
+					<a class="btn btn-large dropdown-toggle" href="#"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Another link</a></li>
+						<li><a href="#">Another link</a></li>
+						<li><a href="#">Another link</a></li>
+					</ul>
+				</div>
+
+				<p>Markup and classes mimic bootstrap. JavaScript is in main.js. Works for different button sizes.</p>
+				<p>Note that the action is triggered on the <code>.dropdown-toggle</code> element, which can be applied either to a single button or a second one as shown.</p>
+			</div>
+		</section>
+
+		<section id="utility">
+		    <div class="container">
+				<h2>Utility classes</h2>
+				<p>The following classes are self explanatory.</p>
+				<ul class="standard">
+					<li><code>.align-center</code></li>
+					<li><code>.align-left</code></li>
+					<li><code>.align-right</code></li>
+					<li><code>.float-right</code></li>
+					<li><code>.float-left</code></li>
+					<li><code>.hidden</code></li>
+					<li><code>.bold</code></li>
+					<li><code>.italic</code></li>
+					<li><code>.block</code></li>
+					
+					<li><code>.desktop-only</code> <span class="desktop-only">Only appears on desktop</span></li>
+					<li><code>.tablet-only</code> <span class="tablet-only">Only appears on tablet</span></li>
+					<li><code>.mobile-only</code> <span class="mobile-only">Only appears on mobile</span></li>
+
+					<li><code>.desktop-hide</code> <span class="desktop-hide">Hidden on desktop</span></li>
+					<li><code>.tablet-hide</code> <span class="tablet-hide">Hidden on tablet</span></li>
+					<li><code>.mobile-hide</code> <span class="mobile-hide">Hidden on mobile</span></li>
+				</ul>
+			</div>
+		</section>
+
+
+		<section id="javascript">
+		    <div class="container">
+				<h2>Plugins and JavaScript</h2>
+				<h3>Class naming and use conventions</h3>
+				<p>All code on the site should adhere to the following convention for class naming and use with regard to JavaScript.</p>
+				<ol class="standard">
+					<li>IDs should only be used for JavaScript, not for styling.</li>
+					<li>Any class used for JavaScript should be prefixed with "js-" and not have any styles associated with it.</li>
+					<li>JavaScript can also be activated through the use of the data attribute on elements.</li>
+				</ol>
+
+				<p>
+					<span class="fillin">
+						Note that the JS included with the house styles is meant as a starting point only. In its current form, the JS is in places inefficient or even inappropriate depending on how it will be used, and you are advised to tailor it specifically to your needs.
+					</span>
+				</p>
+			</div>
+		</section>
+
+
+		<section id="alerts">
+		    <div class="container">
+				<h2>Alerts</h2>
+				<p>Controlled with the <code>.alert</code> class, with an optional class to control type.</p>
+
+				<div class="alert">
+					<a href="#" class="close">&times;</a>
+					<strong>This is a default alert</strong> so there
+				</div>
+
+				<div class="alert alert-warning">
+					<a href="#" class="close">&times;</a>
+					<strong>This is a <code>.alert-warning</code> alert</strong> so there
+				</div>
+
+				<div class="alert alert-error">
+					<a href="#" class="close">&times;</a>
+					<strong>This is a <code>.alert-error</code> alert</strong> so there
+				</div>
+
+				<div class="alert alert-success">
+					<a href="#" class="close">&times;</a>
+					<strong>This is a <code>.alert-success</code> alert</strong> so there
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="alert"&gt;
+    &lt;a href="#" class="close"&gt;&amp;times;&lt;/a&gt;
+    &lt;strong&gt;This is a default alert&lt;/strong&gt; so there
+&lt;/div&gt;
+</code></pre>
+			</div>
+		</section>
+                
+
+		<section id="tabs">
+		    <div class="container">
+				<h2>Tabs</h2>
+				<p>Tabs require the <code>.js-tabbable</code> class in order to be active, otherwise they simply link to another page.</p>
+				<p>Tabs are responsive, will collapse into a single column at low screen widths.</p>
+				<p>Default tabs:</p>
+
+				<div class="tabwrapper js-tabbable">
+					<ul class="nav">
+						<li class="active"><a href="#tab1">Tab 1</a></li>
+						<li><a href="#tab2">Tab 2</a></li>
+						<li><a href="#tab3">Tab 3</a></li>
+					</ul>
+					<div class="tabpane active" id="tab1">
+						content of tab 1
+					</div>
+					<div class="tabpane" id="tab2">
+						content of tab 2
+					</div>
+					<div class="tabpane" id="tab3">
+						content of tab 3
+					</div>
+				</div>
+
+				<p>Tabs left, add the <code>.tabs-left</code> class:</p>
+				<div class="tabwrapper tabs-left js-tabbable">
+					<ul class="nav">
+						<li class="active"><a href="#tab1a">Tab 1</a></li>
+						<li><a href="#tab2a">Tab 2</a></li>
+						<li><a href="#tab3a">Tab 3</a></li>
+					</ul>
+					<div class="tabpane active" id="tab1a">
+						content of tab 1
+					</div>
+					<div class="tabpane" id="tab2a">
+						content of tab 2
+					</div>
+					<div class="tabpane" id="tab3a">
+						content of tab 3
+					</div>
+				</div>
+
+				<p>Tabs right, add the <code>.tabs-right</code> class:</p>
+				<div class="tabwrapper tabs-right js-tabbable">
+					<ul class="nav">
+						<li class="active"><a href="#tab1b">Tab 1</a></li>
+						<li><a href="#tab2b">Tab 2</a></li>
+						<li><a href="#tab3b">Tab 3</a></li>
+					</ul>
+					<div class="tabpane active" id="tab1b">
+						content of tab 1
+					</div>
+					<div class="tabpane" id="tab2b">
+						content of tab 2
+					</div>
+					<div class="tabpane" id="tab3b">
+						content of tab 3
+					</div>
+				</div>
+
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;div class="tabwrapper js-tabbable"&gt;
+    &lt;ul class="nav"&gt;
+        &lt;li class="active"&gt;&lt;a href="#tab1"&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab2"&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tab3"&gt;Tab 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class="tabpane active" id="tab1"&gt;
+        content of tab 1
+    &lt;/div&gt;
+    &lt;div class="tabpane" id="tab2"&gt;
+        content of tab 2
+    &lt;/div&gt;
+    &lt;div class="tabpane" id="tab3"&gt;
+        content of tab 3
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+			</div>
+		</section>
+                
+		<section id="popups">
+		    <div class="container">
+				<h2>Popups</h2>
+				<p>Popups are hidden elements at the foot of the page revealed by a click action on a specific element. By default popups are positioned 10% from the top of the current window position, unless the <code>data-position="fixed"</code> attribute is added to the link.</p>
+
+
+				<ul class="standard">
+					<li>
+						<a href="#" class="js-openpopup" data-target="1">Standard popup</a>
+						(<a href="#" class="js-openpopup" data-target="2">large version</a>)
+					</li>
+
+					<li>
+						<a href="#" class="js-openpopup" data-target="3" data-position="fixed">Fixed position</a>
+						(<a href="#" class="js-openpopup" data-target="4" data-position="fixed">large version</a>)
+					</li>
+				</ul>
+				
+				<h3>Code</h3>
+<pre class="language-markup clear"><code>
+&lt;a href="#" class="js-openpopup" data-target="1"&gt;Standard popup&lt;/a&gt;
+
+&lt;div class="popupwrapper"&gt;
+    &lt;div class="mask"&gt;&lt;/div&gt;
+
+    &lt;div class="popup" data-id="1"&gt;
+        &lt;a href="#" class="js-closepopup"&gt;close&lt;/a&gt;
+        &lt;div class="inner"&gt;
+            &lt;p&gt;This is popup 1.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+			</div>
+		</section>
+
+	</div>
+
+    <div class="popupwrapper">
+        <div class="mask"></div>
+
+        <div class="popup" data-id="1">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p>This is popup 1.</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="2">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p style="font-size:6em;line-height:1em;">This is popup 2, styled explicitly to test what happens when the content of the popup is overly tall.</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="3">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p>This is popup 3, set to fixed position to scroll with the page</p>
+            </div>
+        </div>
+
+        <div class="popup" data-id="4">
+            <a href="#" class="js-closepopup">close</a>
+            <div class="inner">
+                <p style="font-size:6em;line-height:1em;">This is popup 5, styled explicitly to test what happens when the content of the popup is overly tall.</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+</footer>
+
+    <script src="static/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--[if lt IE 9 ]> 
+    <script>(function() {$('body').addClass('iex');})();</script>
+    <![endif]-->
+    <script src="static/js/main.min.js"></script>
+
+    <script src="static/assets/styleguide/prism.js"></script>
+
+    <script>
+        /* credit to Katrin Kerber for much of this useful js */
+        $(document).ready(function() {
+            var $sections = $('#stylesections').find('section[id]:not(.tab-content)'),
+                $links    = $('#stylenav').find('ul a');
+
+            if(window.location.hash) {
+                if(window.location.hash != '#all'){
+                    $sections.hide();
+                    $('#stylesections').find('> section' + window.location.hash).show();
+                    $('#stylenav').find('a[href="' + window.location.hash + '"]').addClass('active');
+                    $('html,body').scrollTop(0);
+                }
+            }
+            else {
+                $sections.hide();
+                $('#stylesections').find('section#overview').show();
+                $('#stylenav li:first-child a').addClass('active');
+            }
+
+            $links.click(function(e){
+                e.preventDefault();
+                var $this  = $(this),
+                    target = $this.attr('href');
+
+                window.location.hash = target;
+
+                $links.not(this).removeClass('active');
+                $this.addClass('active');
+                if(target != '#all'){
+                    $sections.hide();
+                    $('section' +target).fadeIn(500);
+                }
+                else {
+                    $sections.show();
+                }
+            });
+
+            $('#shownav').click(function(e){
+                e.preventDefault();
+                if($(this).hasClass('open')){
+                    $('#stylenav').animate({
+                        'bottom':'100%'
+                    });
+                    $(this).html('Show menu');
+                }
+                else {
+                    $('#stylenav').animate({
+                        'bottom':0
+                    });
+                    $(this).html('Close menu');
+                }
+                $(this).toggleClass('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

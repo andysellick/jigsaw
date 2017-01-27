@@ -1,0 +1,47 @@
+/* --popups */
+
+    @popupWidth: 80%;
+
+    .popupwrapper {
+        .mask {
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.3);
+        }
+        .popup {
+            display:none;
+            position:absolute;
+            left:50%;
+            width:@popupWidth;
+            padding:10px;
+            margin:0 0 0 -@popupWidth / 2;
+            .border-box();
+            background:#FFFFFF;
+
+            &.fixed {
+                position:fixed;
+                top:10%;
+                height:80%;
+                .inner {
+                    max-height:90%;
+                    overflow-y:scroll;
+                }
+            }
+        }
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+	.popupwrapper {
+		.popup {
+			width: 90%;
+			margin-left: -45%;
+		}
+	}
+}

@@ -1,0 +1,29 @@
+/* --tables */
+
+    .table {
+        width:100%;
+        margin:0 0 0.5em 0;
+        border-collapse:collapse;
+        th,td {
+            padding:0.3em 1em;
+            vertical-align:top;
+            text-align:left;
+        }
+        tr {
+            /* not sure this is a great idea */
+            th:first-child,
+            td:first-child {
+                padding-left:0;
+            }
+            th:last-child,
+            td:last-child {
+                padding-right:0;
+            }
+        }
+    }
+
+@media @tabletWidth{
+}
+
+@media @mobileWidth{
+}
