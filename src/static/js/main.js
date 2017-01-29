@@ -62,7 +62,9 @@ var js = {
 	ctx: 0,
 	canvasw: 0,
 	canvash: 0,
-	idealw: 1,
+	savedcanvasw: 0,
+	savedcanvash: 0,
+	idealw: 1, //gets set later based on image size
 	idealh: 1,
 	canvasmode: 1,
 	piececountx: 5, //number of pieces across, fixme must be odd number
@@ -85,6 +87,8 @@ var js = {
 				js.idealh = js.puzzle.height;
 				//console.log(js.idealw,js.idealh);
                 this.initCanvasSize();
+                js.savedcanvasw = js.canvasw;
+                js.savedcanvash = js.canvash;
 	            this.setupEvents();
 	            this.createPieces();
 	            setInterval(js.general.drawPieces,10);
@@ -98,7 +102,7 @@ var js = {
 			var targetw = parentel.offsetWidth;
 			var targeth = parentel.offsetHeight;
 
-			if(js.canvasmode === 1){ //resize the canvas to maintain aspect ratio depending on screen size (may result in gaps either side)
+			if(js.canvasmode === 1){ //resize the canvas to maintain aspect ratio depending on screen size (may result in gaps either side) - we're using this one
 				var sizes = js.general.calculateAspectRatio(js.idealw,js.idealh,targetw,targeth);
 				js.canvas.width = js.canvasw = sizes[0];
 				js.canvas.height = js.canvash = sizes[1];
@@ -124,6 +128,29 @@ var js = {
 		},
         clearCanvas: function(){
             js.canvas.width = js.canvas.width; //this is apparently a hack but seems to work
+        },
+        resizeCanvas: function(){
+            js.general.initCanvasSize();
+            var diffx = (js.canvasw / js.savedcanvasw) * 100;
+            var diffy = (js.canvash / js.savedcanvash) * 100;
+            for(var p = 0; p < js.pieces.length; p++){
+                js.pieces[p].x = (js.pieces[p].x / 100) * diffx;
+                js.pieces[p].y = (js.pieces[p].y / 100) * diffy;
+                js.pieces[p].w = (js.pieces[p].w / 100) * diffx;
+                js.pieces[p].h = (js.pieces[p].h / 100) * diffy;
+                js.pieces[p].solvedx = (js.pieces[p].solvedx / 100) * diffx;
+                js.pieces[p].solvedy = (js.pieces[p].solvedy / 100) * diffy;
+            }
+            for(p = 0; p < js.solvedpieces.length; p++){
+                js.solvedpieces[p].x = (js.solvedpieces[p].x / 100) * diffx;
+                js.solvedpieces[p].y = (js.solvedpieces[p].y / 100) * diffy;
+                js.solvedpieces[p].w = (js.solvedpieces[p].w / 100) * diffx;
+                js.solvedpieces[p].h = (js.solvedpieces[p].h / 100) * diffy;
+                js.solvedpieces[p].solvedx = (js.solvedpieces[p].solvedx / 100) * diffx;
+                js.solvedpieces[p].solvedy = (js.solvedpieces[p].solvedy / 100) * diffy;
+            }
+            js.savedcanvasw = js.canvasw;
+            js.savedcanvash = js.canvash;
         },
         randomNumber: function(min,max){
 			return((Math.random() * (max - min) + min));
@@ -165,7 +192,7 @@ var js = {
 			//console.log(x,y);
 			return([x,y]);
 		},
-		
+
 		//identify which piece has been clicked on
 		clickPiece: function(x,y){
 			for(var i = 0; i < js.pieces.length; i++){
@@ -500,6 +527,6 @@ window.onload = function(){
 	var resize;
 	window.addEventListener('resize', function(event){
 		clearTimeout(resize);
-		resize = setTimeout(js.general.initCanvasSize,200);
+		resize = setTimeout(js.general.resizeCanvas,200);
 	});
 };
