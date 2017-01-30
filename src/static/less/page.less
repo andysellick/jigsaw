@@ -19,10 +19,7 @@
 		height:100vh;
 		background:silver;
 		.canvas {
-			background:white;
-			&.clicked {
-				background:red;
-			}
+			box-shadow:0 0 10px rgba(0,0,0,0.2);
 		}
 	}
 	
@@ -30,12 +27,14 @@
 		position:fixed;
 		bottom:0;
 		left:50%;
-		padding:1em;
-		background:white;
+		padding:0.5em;
+		background:rgba(255,255,255,0.6);
 		.transform( translateX(-50%) );
-		box-shadow:0 0 10px rgba(0,0,0,0.5);
+		box-shadow:0 0 10px rgba(0,0,0,0.2);
+		border-radius:0.5em 0.5em 0 0;
 		input {
 			padding:0.2em;
+			max-width:4em;
 			border:solid 1px #333333;
 		}
 	}

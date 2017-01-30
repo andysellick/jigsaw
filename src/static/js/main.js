@@ -88,7 +88,7 @@ var js = {
 				js.idealw = js.puzzle.width;
 				js.idealh = js.puzzle.height;
 				//console.log(js.idealw,js.idealh);
-                this.initCanvasSize();
+                js.general.initCanvasSize();
                 js.savedcanvasw = js.canvasw;
                 js.savedcanvash = js.canvash;
 	            this.setupEvents();
@@ -286,13 +286,40 @@ var js = {
 				return(0);
 			}
 		},
-		
+
+		//update the puzzle based on entered values when 'update' is clicked
 		updateSettings: function(){
 			var across = document.getElementById('piecesx').value;
 			var down = document.getElementById('piecesy').value;
-			js.piececountx = across;
-			js.piececounty = down;
-			js.general.createPieces();
+
+			var file = document.getElementById('fileupload').files[0];
+			//console.log(file);
+			if(typeof file !== 'undefined'){
+				var reader = new FileReader();
+				reader.onload = function(){
+					//console.log(reader.result);
+					var img = new Image();
+					img.src = reader.result;
+					img.onload = function(){
+						js.puzzle = img;
+						js.piececountx = across;
+						js.piececounty = down;
+						//fixme this is a repetition of some of the lines in init - could be more efficient
+						js.idealw = js.puzzle.width;
+						js.idealh = js.puzzle.height;
+		                js.general.initCanvasSize();
+		                js.savedcanvasw = js.canvasw;
+		                js.savedcanvash = js.canvash;
+						js.general.createPieces();
+					}
+				}
+				reader.readAsDataURL(file);
+			}
+			else {
+				js.piececountx = across;
+				js.piececounty = down;
+				js.general.createPieces();
+			}
 		},
 
 		hideAllPieces: function(){
@@ -347,7 +374,7 @@ var js = {
 
 		//edge is either 0,1,2,3 - corresponding to top, right, bottom, left, arccounterClockwise decides if tab or blank, ie. in or out
 		drawTabOrBlank: function(obj,edge,arccounterClockwise){
-			var arcradius = obj.h / 4;
+			var arcradius = Math.min(obj.h / 4, obj.w / 4);
 			var arcx = 0;
 			var arcy = 0;
 			var arcstartAngle = 0;
@@ -401,8 +428,8 @@ var js = {
 	            js.ctx.strokeStyle = 'rgba(0,0,0,0)';
 			}
 			else {
-	            js.ctx.lineWidth = 3;
-	            js.ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+	            js.ctx.lineWidth = 2;
+	            js.ctx.strokeStyle = 'rgba(0,0,0,0.5)';
 			}
 
             if(!obj.visible){
