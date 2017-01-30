@@ -16,13 +16,16 @@
 		.flex;
 		.align-items(center);
 		.justify-content(center);
-		height:100vh;
-		background:silver;
+		margin:20px;
+		height:calc(~'100vh - 40px');
+		background:@white;
+		.border-box;
 		.canvas {
 			box-shadow:0 0 10px rgba(0,0,0,0.2);
+			background:silver;
 		}
 	}
-	
+
 	.options {
 		position:fixed;
 		bottom:0;

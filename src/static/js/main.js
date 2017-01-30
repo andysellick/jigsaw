@@ -220,6 +220,12 @@ var js = {
 		//let go of the current piece
 		releasePiece: function(){
 			if(js.clickedpiece !== -1){
+				//move selected piece to the end of the array - makes last touched piece always be on top
+				var tmp = js.pieces[js.clickedpiece];
+				js.pieces.splice(js.clickedpiece,1);
+				js.pieces.push(tmp);
+
+
 				for(var p = 0; p < js.pieces.length; p++){
 					js.pieces[p].visible = 1;
 				}
@@ -246,7 +252,7 @@ var js = {
 			var sx = js.pieces[js.clickedpiece].solvedx;
 			var sy = js.pieces[js.clickedpiece].solvedy;
 
-			var tolerance = 20;
+			var tolerance = 30;
 			//if the piece is solved
 			if(Math.abs(newx - sx) < tolerance && Math.abs(newy - sy) < tolerance){
 				js.pieces[js.clickedpiece].x = sx;
@@ -289,8 +295,11 @@ var js = {
 
 		//update the puzzle based on entered values when 'update' is clicked
 		updateSettings: function(){
-			var across = document.getElementById('piecesx').value;
-			var down = document.getElementById('piecesy').value;
+			var elAcross = document.getElementById('piecesx');
+			var elDown = document.getElementById('piecesy');
+
+			var across = Math.min(20,elAcross.value);
+			var down = Math.min(20,elDown.value);
 
 			var file = document.getElementById('fileupload').files[0];
 			//console.log(file);
@@ -311,8 +320,8 @@ var js = {
 		                js.savedcanvasw = js.canvasw;
 		                js.savedcanvash = js.canvash;
 						js.general.createPieces();
-					}
-				}
+					};
+				};
 				reader.readAsDataURL(file);
 			}
 			else {
@@ -320,6 +329,8 @@ var js = {
 				js.piececounty = down;
 				js.general.createPieces();
 			}
+			elAcross.value = across;
+			elDown.value = down;
 		},
 
 		hideAllPieces: function(){
@@ -336,10 +347,17 @@ var js = {
 			var w = js.canvasw / js.piececountx;
 			var h = js.canvash / js.piececounty;
 
+			//try to distribute the pieces within the middle of the puzzle, so we can work on the edges first
+			var rangeminx = (js.canvasw / 100) * 10;
+			var rangemaxx = ((js.canvasw - w) / 100) * 90;
+			var rangeminy = (js.canvash / 100) * 10;
+			var rangemaxy = ((js.canvash - h) / 100) * 90;
+
 			for(var y = 0; y < js.piececounty; y++){
 				for(var x = 0; x < js.piececountx; x++){
-					var piecex = js.general.randomNumber(0,js.canvasw - w);
-					var piecey = js.general.randomNumber(0,js.canvash - h);
+
+					var piecex = js.general.randomNumber(rangeminx,rangemaxx);
+					var piecey = js.general.randomNumber(rangeminy,rangemaxy);
 					if(js.debug){ //if in debug mode, start the puzzle completed
 						piecex = w * x;
 						piecey = h * y;
