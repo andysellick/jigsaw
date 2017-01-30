@@ -68,7 +68,7 @@ var js = {
 	idealw: 1, //gets set later based on image size
 	idealh: 1,
 	canvasmode: 1,
-	piececountx: 5, //number of pieces across
+	piececountx: 6, //number of pieces across
 	piececounty: 3, //number of pieces down
 	puzzle: 0,
 	pieces: [],
@@ -233,6 +233,10 @@ var js = {
 				js.pieces[js.clickedpiece].offsety = 0;
 				js.general.checkSolved();
 				js.clickedpiece = -1;
+				
+				if(js.pieces.length === 0){
+					document.getElementById('body').className = 'solved';
+				}
 			}
 		},
 
@@ -253,6 +257,8 @@ var js = {
 			var sy = js.pieces[js.clickedpiece].solvedy;
 
 			var tolerance = 30;
+			//console.log(newx,sx);
+
 			//if the piece is solved
 			if(Math.abs(newx - sx) < tolerance && Math.abs(newy - sy) < tolerance){
 				js.pieces[js.clickedpiece].x = sx;
@@ -331,6 +337,7 @@ var js = {
 			}
 			elAcross.value = across;
 			elDown.value = down;
+			document.getElementById('body').className = '';
 		},
 
 		hideAllPieces: function(){
