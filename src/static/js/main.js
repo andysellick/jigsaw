@@ -39,7 +39,7 @@ for(var im = 0; im < allimages.length; im++){
 	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
 }
 
-function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype){
+function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype,rowx,rowy){
 	this.x = x;
 	this.y = y;
 	this.w = w;
@@ -53,6 +53,8 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype){
 	this.solved = 0;
 	this.offsetx = -1;
 	this.offsety = -1;
+	this.rowx = rowx;
+	this.rowy = rowy;
 }
 
 
@@ -67,12 +69,13 @@ var js = {
 	idealw: 1, //gets set later based on image size
 	idealh: 1,
 	canvasmode: 1,
-	piececountx: 5, //number of pieces across, fixme must be odd number
-	piececounty: 3, //number of pieces down, fixme must be an odd number
+	piececountx: 5, //number of pieces across
+	piececounty: 5, //number of pieces down
 	puzzle: 0,
 	pieces: [],
 	solvedpieces: [],
 	clickedpiece: -1,
+	debug: 1,
 
     general: {
         init: function(){
@@ -91,8 +94,10 @@ var js = {
                 js.savedcanvash = js.canvash;
 	            this.setupEvents();
 	            this.createPieces();
+				document.getElementById('piecesx').value = js.piececountx;
+				document.getElementById('piecesy').value = js.piececounty;
+
 	            setInterval(js.general.drawPieces,10);
-	            //this.drawCanvas();
             }
         },
 
@@ -178,6 +183,12 @@ var js = {
 					js.general.movePiece(e);
 				}
 			},false);
+
+			var onupdate = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('updatePuzzle').addEventListener(onupdate,function(e){
+				//console.log('click down');
+				js.general.updateSettings();
+			},false);
 		},
 
 		//find where on the canvas the mouse/touch is
@@ -195,10 +206,9 @@ var js = {
 
 		//identify which piece has been clicked on
 		clickPiece: function(x,y){
-			for(var i = 0; i < js.pieces.length; i++){
+			for(var i = js.pieces.length - 1; i >= 0; i--){
 				if(js.general.checkCollision(js.pieces[i],x,y)){
-					//console.log('found one');
-					console.log('Type of piece is',js.pieces[i].piecetype);
+					//console.log('Type of piece is',js.pieces[i].piecetype);
 					js.clickedpiece = i;
 					js.general.hideAllPieces();
 					js.pieces[i].visible = 1;
@@ -253,7 +263,6 @@ var js = {
 			}
 		},
 
-
 		checkCollision: function(obj,x,y){
 			if(!obj.solved){
 				//rule out any possible collisions, remembering that all y numbers are inverted on canvas
@@ -279,6 +288,14 @@ var js = {
 				return(0);
 			}
 		},
+		
+		updateSettings: function(){
+			var across = document.getElementById('piecesx').value;
+			var down = document.getElementById('piecesy').value;
+			js.piececountx = across;
+			js.piececounty = down;
+			js.general.createPieces();
+		},
 
 		hideAllPieces: function(){
 			//console.log('hideAllPieces');
@@ -289,17 +306,19 @@ var js = {
 		
 		//create all the pieces of the puzzle
 		createPieces: function(){
+			js.pieces = [];
+			js.solvedpieces = [];
 			var w = js.canvasw / js.piececountx;
 			var h = js.canvash / js.piececounty;
 
 			for(var y = 0; y < js.piececounty; y++){
 				for(var x = 0; x < js.piececountx; x++){
-                    /*
-					var piecex = w * x; //fixme randomise later
-					var piecey = h * y;
-					*/
 					var piecex = js.general.randomNumber(0,js.canvasw - w);
 					var piecey = js.general.randomNumber(0,js.canvash - h);
+					if(js.debug){ //if in debug mode, start the puzzle completed
+						piecex = w * x;
+						piecey = h * y;
+					}
 					var solvedx = w * x;
 					var solvedy = h * y;
 					var spritex = 0;
@@ -373,12 +392,13 @@ var js = {
                         }
                     }
 
-					var newpiece = new NewPiece(piecex,piecey,w,h,solvedx,solvedy,spritex,spritey,piecetype);
+					var newpiece = new NewPiece(piecex,piecey,w,h,solvedx,solvedy,spritex,spritey,piecetype,x,y);
 					js.pieces.push(newpiece);
 				}
 			}
 		},
 		
+		//this seems to be returning false if the number is odd
         isEven: function(n) {
             return n % 2 == 0;
         },
@@ -394,6 +414,42 @@ var js = {
 				js.general.drawPiece(js.pieces[q]);
 			}
 		},
+
+		//edge is either 0,1,2,3 - corresponding to top, right, bottom, left, arccounterClockwise decides if tab or blank, ie. in or out
+		drawTabOrBlank: function(obj,edge,arccounterClockwise){
+			var arcradius = obj.h / 4;
+			var arcx = 0;
+			var arcy = 0;
+			var arcstartAngle = 0;
+			var arcendAngle = 0;
+			switch(edge){
+				case 0:
+					arcx = obj.x + (obj.w / 2);
+					arcy = obj.y;
+					arcstartAngle = 1 * Math.PI;
+					arcendAngle = 0 * Math.PI;
+					break;
+				case 1:
+	                arcx = obj.x + obj.w;
+	                arcy = obj.y + (obj.h / 2);
+	                arcstartAngle = 1.5 * Math.PI;
+	                arcendAngle = 0.5 * Math.PI;
+					break;
+				case 2:
+	                arcx = obj.x + (obj.w / 2);
+	                arcy = obj.y + obj.h;
+	                arcstartAngle = 0 * Math.PI;
+	                arcendAngle = 1 * Math.PI;
+					break;
+				case 3:
+	                arcx = obj.x;
+	                arcy = obj.y + (obj.h / 2);
+	                arcstartAngle = 0.5 * Math.PI;
+	                arcendAngle = 1.5 * Math.PI;
+					break;
+			}
+			js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
+		},
 		
         drawPiece: function(obj){
             var arcx = 0;
@@ -403,104 +459,114 @@ var js = {
             var arcendAngle = 0;
             var arccounterClockwise = true;
 
+            var puzzleWEven = js.general.isEven(js.piececountx);
+            var puzzleHEven = js.general.isEven(js.piececounty);
+
+            var pieceXEven = js.general.isEven(obj.rowx);
+            var pieceYEven = js.general.isEven(obj.rowy);
+
             js.ctx.save();
-            
+            if(obj.solved){
+	            js.ctx.lineWidth = 0;
+	            js.ctx.strokeStyle = 'rgba(0,0,0,0)';
+			}
+			else {
+	            js.ctx.lineWidth = 3;
+	            js.ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+			}
+
             if(!obj.visible){
                 js.ctx.globalAlpha = 0.3;
             }
 
             js.ctx.beginPath();
             js.ctx.moveTo(obj.x, obj.y); //top left corner
-
-            //draw a sticky bit in, top edge
-            if(obj.piecetype === 5 || obj.piecetype === 7 || obj.piecetype === 8 || obj.piecetype === 12){
-                arcx = obj.x + (obj.w / 2);
-                arcy = obj.y;
-                arcradius = obj.h / 6;
-                arcstartAngle = 1 * Math.PI;
-                arcendAngle = 0 * Math.PI;
-                arccounterClockwise = true;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
-            //sticky bit out, top edge
-            if(obj.piecetype === 9 || obj.piecetype === 6 || obj.piecetype === 10 || obj.piecetype === 11 || obj.piecetype === 13 || obj.piecetype === 14){
-                arcx = obj.x + (obj.w / 2);
-                arcy = obj.y;
-                arcradius = obj.h / 6;
-                arcstartAngle = 1 * Math.PI;
-                arcendAngle = 0 * Math.PI;
-                arccounterClockwise = false;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
+            
+            //deal with top edge
+            if(obj.rowy > 0){
+				if(pieceYEven){
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,0,1); //draw a sticky bit out, top edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,0,0); //draw a sticky bit in, top edge
+					}
+				}
+				else {
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,0,0); //draw a sticky bit in, top edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,0,1); //draw a sticky bit out, top edge
+					}
+				}
+			}
 
             js.ctx.lineTo(obj.x + obj.w,obj.y); //top right corner
 
-            //draw a sticky bit in, right edge
-            if(obj.piecetype === 1 || obj.piecetype === 3 || obj.piecetype === 6 || obj.piecetype === 9 || obj.piecetype === 11 || obj.piecetype === 13){
-                arcx = obj.x + obj.w;
-                arcy = obj.y + (obj.h / 2);
-                arcradius = obj.h / 6;
-                arcstartAngle = 1.5 * Math.PI;
-                arcendAngle = 0.5 * Math.PI;
-                arccounterClockwise = true;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
-            //draw a sticky bit out, right edge
-            if(obj.piecetype === 2 || obj.piecetype === 5 || obj.piecetype === 7 || obj.piecetype === 12){
-                arcx = obj.x + obj.w;
-                arcy = obj.y + (obj.h / 2);
-                arcradius = obj.h / 6;
-                arcstartAngle = 1.5 * Math.PI;
-                arcendAngle = 0.5 * Math.PI;
-                arccounterClockwise = false;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
+            //deal with right edge
+            if(obj.rowx < js.piececountx - 1){
+				if(pieceYEven){
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,1,0); //draw a sticky bit in, right edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,1,1); //draw a sticky bit out, right edge
+					}
+				}
+				else {
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,1,1); //draw a sticky bit out, right edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,1,0); //draw a sticky bit in, right edge
+					}
+				}
+			}
 
             js.ctx.lineTo(obj.x + obj.w, obj.y + obj.h); //bottom right corner
 
-            //draw a sticky bit in, bottom edge
-            if(obj.piecetype === 2 || obj.piecetype === 5 || obj.piecetype === 7 || obj.piecetype === 8){
-                arcx = obj.x + (obj.w / 2);
-                arcy = obj.y + obj.h;
-                arcradius = obj.h / 6;
-                arcstartAngle = 0 * Math.PI;
-                arcendAngle = 1 * Math.PI;
-                arccounterClockwise = true;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
-            //sticky bit out, bottom edge
-            if(obj.piecetype === 1 || obj.piecetype === 3 || obj.piecetype === 4 || obj.piecetype === 6 || obj.piecetype === 9 || obj.piecetype === 10){
-                arcx = obj.x + (obj.w / 2);
-                arcy = obj.y + obj.h;
-                arcradius = obj.h / 6;
-                arcstartAngle = 0 * Math.PI;
-                arcendAngle = 1 * Math.PI;
-                arccounterClockwise = false;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
+            //deal with bottom edge
+            if(obj.rowy < js.piececounty - 1){
+				if(pieceYEven){
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,2,1); //draw a sticky bit out, bottom edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,2,0); //draw a sticky bit in, bottom edge
+					}
+				}
+				else {
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,2,0); //draw a sticky bit in, bottom edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,2,1); //draw a sticky bit out, bottom edge
+					}
+				}
+			}
 
             js.ctx.lineTo(obj.x, obj.y + obj.h); //bottom left corner
 
-            //draw a sticky bit in, left edge
-            if(obj.piecetype === 3 || obj.piecetype === 4 || obj.piecetype === 6 || obj.piecetype === 10 || obj.piecetype === 13 || obj.piecetype === 14){
-                arcx = obj.x;
-                arcy = obj.y + (obj.h / 2);
-                arcradius = obj.h / 6;
-                arcstartAngle = 0.5 * Math.PI;
-                arcendAngle = 1.5 * Math.PI;
-                arccounterClockwise = true;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
-            //draw a sticky bit out, left edge
-            if(obj.piecetype === 2 || obj.piecetype === 7 || obj.piecetype === 8 || obj.piecetype === 12){
-                arcx = obj.x;
-                arcy = obj.y + (obj.h / 2);
-                arcradius = obj.h / 6;
-                arcstartAngle = 0.5 * Math.PI;
-                arcendAngle = 1.5 * Math.PI;
-                arccounterClockwise = false;
-                js.ctx.arc(arcx, arcy, arcradius, arcstartAngle, arcendAngle, arccounterClockwise);
-            }
+            //deal with left edge
+            if(obj.rowx > 0){
+				if(pieceYEven){
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,3,0); //draw a sticky bit in, left edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,3,1); //draw a sticky bit out, left edge
+					}
+				}
+				else {
+					if(pieceXEven){
+						js.general.drawTabOrBlank(obj,3,1); //draw a sticky bit out, left edge
+					}
+					else {
+						js.general.drawTabOrBlank(obj,3,0); //draw a sticky bit in, left edge
+					}
+				}
+			}
 
             js.ctx.lineTo(obj.x, obj.y); //top left corner - back to origin
             js.ctx.closePath();
