@@ -70,12 +70,12 @@ var js = {
 	idealh: 1,
 	canvasmode: 1,
 	piececountx: 5, //number of pieces across
-	piececounty: 5, //number of pieces down
+	piececounty: 3, //number of pieces down
 	puzzle: 0,
 	pieces: [],
 	solvedpieces: [],
 	clickedpiece: -1,
-	debug: 1,
+	debug: 0,
 
     general: {
         init: function(){
