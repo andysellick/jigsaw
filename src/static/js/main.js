@@ -39,7 +39,7 @@ for(var im = 0; im < allimages.length; im++){
 	callAllPreloads(allimages[im].images, imgpath + allimages[im].dir + '/');
 }
 
-function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype,rowx,rowy){
+function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 	this.x = x;
 	this.y = y;
 	this.w = w;
@@ -48,7 +48,6 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,piecetype,rowx,rowy){
 	this.solvedy = solvedy;
 	this.spritex = spritex;
 	this.spritey = spritey;
-	this.piecetype = piecetype;
 	this.visible = 1;
 	this.solved = 0;
 	this.offsetx = -1;
@@ -208,7 +207,6 @@ var js = {
 		clickPiece: function(x,y){
 			for(var i = js.pieces.length - 1; i >= 0; i--){
 				if(js.general.checkCollision(js.pieces[i],x,y)){
-					//console.log('Type of piece is',js.pieces[i].piecetype);
 					js.clickedpiece = i;
 					js.general.hideAllPieces();
 					js.pieces[i].visible = 1;
@@ -323,76 +321,8 @@ var js = {
 					var solvedy = h * y;
 					var spritex = 0;
 					var spritey = 0;
-					var piecetype = 0;
 
-                    //FIXME some repetition here
-					if(x === 0){ //left edge
-                        if(y === 0){
-    						piecetype = 1; //top left
-                        }
-                        else if(y === js.piececounty - 1){
-    						piecetype = 11; //bottom left
-                        }
-                        else if(!js.general.isEven(y)){
-                            piecetype = 5; //left edge, type 1
-                        }
-                        else if(js.general.isEven(y)){
-                            piecetype = 9; //left edge, type 2
-                        }
-					}
-					else if(y === 0){ //top edge
-					    if(x === js.piececountx - 1){
-                            piecetype = 4; //top right, fixme repeated below
-                        }
-                        else if(!js.general.isEven(x)){
-                            piecetype = 2; //top edge, type 1
-                        }
-                        else if(js.general.isEven(x)){
-                            piecetype = 3; //top edge, type 2
-                        }
-                    }
-					else if(x === js.piececountx - 1){ //right edge
-                        if(y === 0){
-    						piecetype = 4; //top right
-                        }
-                        else if(y === js.piececounty - 1){
-    						piecetype = 14; //bottom right
-    					}
-    					else if(!js.general.isEven(y)){
-                            piecetype = 8;
-                        }
-                        else if(js.general.isEven(y)){
-                            piecetype = 10;
-                        }
-					}
-					else if(y === js.piececounty - 1){ //bottom edge
-                        if(!js.general.isEven(x)){
-                            piecetype = 12;
-                        }
-                        else {
-                            piecetype = 13;
-                        }
-                    }
-                    else {
-                        if(!js.general.isEven(x)){
-                            if(!js.general.isEven(y)){
-                                piecetype = 6;
-                            }
-                            else {
-                                piecetype = 7;
-                            }
-                        }
-                        else {
-                            if(!js.general.isEven(y)){
-                                piecetype = 7;
-                            }
-                            else {
-                                piecetype = 6;
-                            }
-                        }
-                    }
-
-					var newpiece = new NewPiece(piecex,piecey,w,h,solvedx,solvedy,spritex,spritey,piecetype,x,y);
+					var newpiece = new NewPiece(piecex,piecey,w,h,solvedx,solvedy,spritex,spritey,x,y);
 					js.pieces.push(newpiece);
 				}
 			}
