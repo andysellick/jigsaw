@@ -33,18 +33,26 @@
     <div class="canvaswrapper" id="canvasparent">
 	   	<canvas id="canvas" class="canvas"></canvas>
     </div>
+    
+    <div class="optionstrigger" id="showoptions"><img src="static/img/cog.svg"/></div>
 
-    <div id="options" class="options">
-    	<label>
-			Across: <input type="number" id="piecesx"/>
-		</label>
-		<label>
-			Down: <input type="number" id="piecesy"/>
-		</label>
-		<label>
-			Image: <input type="file" id="fileupload"/>
-		</label>
-		<button type="submit" id="updatePuzzle" class="btn">Update</button>
+    <div id="options" class="optionswrapper">
+        <div class="mask" id="hideoptions"></div>
+        <div class="options">
+            <h1 class="h3 align-center">Jigsaw</h1>
+            <h2 class="h4 align-center">Options</h2>
+        	<label>
+    			Across: <input type="number" id="piecesx"/>
+    		</label>
+    		<label>
+    			Down: <input type="number" id="piecesy"/>
+    		</label>
+    		<label>
+    			Image: <input type="file" id="fileupload"/>
+    		</label>
+    		<button type="submit" id="updatePuzzle" class="btn btn-block">Update</button>
+    		<button type="submit" id="resetPuzzle" class="btn btn-block">Reset</button>
+    	</div>
     </div>
 
     <!--[if lt IE 9 ]>

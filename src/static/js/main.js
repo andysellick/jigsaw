@@ -84,20 +84,23 @@ var js = {
             }
             else {
                 js.ctx = js.canvas.getContext('2d');
-                js.puzzle = allimages[0].images[0];
-				js.idealw = js.puzzle.width;
-				js.idealh = js.puzzle.height;
-				//console.log(js.idealw,js.idealh);
-                js.general.initCanvasSize();
-                js.savedcanvasw = js.canvasw;
-                js.savedcanvash = js.canvash;
+                js.general.initPuzzle();
 	            this.setupEvents();
-	            this.createPieces();
-				document.getElementById('piecesx').value = js.piececountx;
-				document.getElementById('piecesy').value = js.piececounty;
-
 	            setInterval(js.general.drawPieces,10);
             }
+        },
+        initPuzzle: function(){
+            js.puzzle = allimages[0].images[0];
+			js.idealw = js.puzzle.width;
+			js.idealh = js.puzzle.height;
+            js.general.initCanvasSize();
+            js.savedcanvasw = js.canvasw;
+            js.savedcanvash = js.canvash;
+            js.piececountx = 6;
+            js.piececounty = 3;
+			document.getElementById('piecesx').value = js.piececountx;
+			document.getElementById('piecesy').value = js.piececounty;
+	        js.general.createPieces();
         },
 
         //initialise the size of the canvas based on the ideal aspect ratio and the size of the parent element
@@ -156,6 +159,11 @@ var js = {
             js.savedcanvasw = js.canvasw;
             js.savedcanvash = js.canvash;
         },
+        resetPuzzle: function(){
+            document.getElementById('options').className = 'optionswrapper';
+			document.getElementById('body').className = '';
+            js.general.initPuzzle();
+        },
         randomNumber: function(min,max){
 			return((Math.random() * (max - min) + min));
 		},
@@ -185,9 +193,22 @@ var js = {
 
 			var onupdate = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 			document.getElementById('updatePuzzle').addEventListener(onupdate,function(e){
-				//console.log('click down');
 				js.general.updateSettings();
 			},false);
+
+			var showoptions = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('showoptions').addEventListener(showoptions,function(e){
+                document.getElementById('options').className = 'optionswrapper shown';
+			},false);
+			var hideoptions = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('hideoptions').addEventListener(hideoptions,function(e){
+                document.getElementById('options').className = 'optionswrapper';
+			},false);
+			var reset = ((document.ontouchstart!==null)?'mousedown':'touchstart');
+			document.getElementById('resetPuzzle').addEventListener(reset,function(e){
+                js.general.resetPuzzle();
+			},false);
+
 		},
 
 		//find where on the canvas the mouse/touch is
@@ -338,6 +359,7 @@ var js = {
 			elAcross.value = across;
 			elDown.value = down;
 			document.getElementById('body').className = '';
+            document.getElementById('options').className = 'optionswrapper';
 		},
 
 		hideAllPieces: function(){

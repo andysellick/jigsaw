@@ -18,11 +18,13 @@
         display:inline-block;
         padding:0 @btnhorzpadding;
         line-height:@btnlineheight;
-        margin:0;
+        margin:0 0 0.5em 0;
         .border-box();
         border:0;
-        background:#DDD;
-        color:#666;
+        border-radius:3px;
+        background:@black;
+        color:@white;
+        .transition(all 0.3s);
         outline:0;
         cursor:pointer;
         text-align:center;
@@ -44,14 +46,11 @@
 
         &:hover {
             text-decoration:none;
+            background:#666666;
         }
         &.btn-block {
             display:block;
             width:100%;
-            text-align:left;
-            &.center {
-                text-align:center;
-            }
         }
         &[disabled],
         &.disabled {
