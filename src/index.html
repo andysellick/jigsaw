@@ -1,64 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" id="site" class="nojs">
 <head>
-<!--[if lt IE 9]>
-<script src="static/bower_components/html5shiv/dist/html5shiv.min.js"></script>
-<![endif]-->
+  <!--[if lt IE 9]>
+  <script src="static/bower_components/html5shiv/dist/html5shiv.min.js"></script>
+  <![endif]-->
 
-    <title>Jigsaw</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0">
+  <title>Jigsaw</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0">
 
-	<link rel="canonical" href="https://fixme">
-	<meta name=description content="fixme">
-	<meta property=og:title content="fixme">
-	<meta property=og:site_name content="fixme">
-	<meta property=og:description content="fixme">
-	<meta property=articlepublisher content="https://www.facebook.com/fixme">
-	<meta property=og:url content="https://fixme">
-	<meta property=og:type content="website">
-	<meta property=og:image content="https://fixme.jpg">
-	<meta name=twitter:card content="summary_large_image">
-	<meta name=twitter:site content="@fixme">
-	<meta name=twitter:title content="fixme">
-	<meta name=twitter:description content="fixme">
-	<meta name=twitter:url content="http://fixme">
-	<meta name=twitter:image content="http://fixme.jpg">
-    <link rel="shortcut icon" href="/static/favicon.ico">
+  <link rel="canonical" href="https://fixme">
+  <meta name=description content="fixme">
+  <meta property=og:title content="fixme">
+  <meta property=og:site_name content="fixme">
+  <meta property=og:description content="fixme">
+  <meta property=articlepublisher content="https://www.facebook.com/fixme">
+  <meta property=og:url content="https://fixme">
+  <meta property=og:type content="website">
+  <meta property=og:image content="https://fixme.jpg">
+  <meta name=twitter:card content="summary_large_image">
+  <meta name=twitter:site content="@fixme">
+  <meta name=twitter:title content="fixme">
+  <meta name=twitter:description content="fixme">
+  <meta name=twitter:url content="http://fixme">
+  <meta name=twitter:image content="http://fixme.jpg">
+  <link rel="shortcut icon" href="/static/favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
+  <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"/>
 </head>
 
 <body id="body">
-    <div class="canvaswrapper" id="canvasparent">
-	   	<canvas id="canvas" class="canvas"></canvas>
+  <div class="canvaswrapper" id="canvasparent">
+    <canvas id="canvas" class="canvas"></canvas>
+  </div>
+
+  <div class="optionstrigger" id="showoptions"><img src="static/img/cog.svg"/></div>
+
+  <div id="options" class="optionswrapper">
+    <div class="mask" id="hideoptions"></div>
+    <div class="options">
+      <h1 class="h3 align-center">Jigsaw</h1>
+      <h2 class="h4 align-center">Options</h2>
+      <label>
+        Across: <input type="number" id="piecesx"/>
+      </label>
+      <label>
+        Down: <input type="number" id="piecesy"/>
+      </label>
+      <label>
+        Image: <input type="file" id="fileupload"/>
+      </label>
+      <button type="submit" id="updatePuzzle" class="btn btn-block">Update</button>
+      <button type="submit" id="resetPuzzle" class="btn btn-block">Reset</button>
     </div>
-    
-    <div class="optionstrigger" id="showoptions"><img src="static/img/cog.svg"/></div>
+  </div>
 
-    <div id="options" class="optionswrapper">
-        <div class="mask" id="hideoptions"></div>
-        <div class="options">
-            <h1 class="h3 align-center">Jigsaw</h1>
-            <h2 class="h4 align-center">Options</h2>
-        	<label>
-    			Across: <input type="number" id="piecesx"/>
-    		</label>
-    		<label>
-    			Down: <input type="number" id="piecesy"/>
-    		</label>
-    		<label>
-    			Image: <input type="file" id="fileupload"/>
-    		</label>
-    		<button type="submit" id="updatePuzzle" class="btn btn-block">Update</button>
-    		<button type="submit" id="resetPuzzle" class="btn btn-block">Reset</button>
-    	</div>
-    </div>
-
-    <!--[if lt IE 9 ]>
-    <script>(function() {$('body').addClass('iex');})();</script>
-    <![endif]-->
-    <script src="static/js/main.min.js"></script>
-
+  <!--[if lt IE 9 ]>
+  <script>(function() {$('body').addClass('iex');})();</script>
+  <![endif]-->
+  <script src="static/js/main.min.js"></script>
 </body>
 </html>

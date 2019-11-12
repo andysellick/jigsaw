@@ -1,103 +1,103 @@
 /* --page */
-    /* this file should contain html and body styles, and any other styles that relate to the general wrapping of every page e.g. a pagewrapping element */
+/* this file should contain html and body styles, and any other styles that relate to the general wrapping of every page e.g. a pagewrapping element */
 
-    html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family:Arial, Verdana, sans-serif;
+  font-size: 100%;
+  background:@white;
+  color:@black;
+  .transition( all 0.3s );
+  &.solved {
+    background:@black;
+  }
+}
+
+.canvaswrapper {
+  .flex;
+  .align-items(center);
+  .justify-content(center);
+  margin:20px;
+  height:calc(~'100vh - 40px');
+  .border-box;
+
+  .canvas {
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+    background:silver;
+  }
+}
+
+.optionstrigger {
+  position:fixed;
+  bottom:0;
+  right:0;
+  padding:0.5em;
+  background:@white;
+  width:2em;
+  height:2em;
+  box-shadow:0 0 10px rgba(0,0,0,0.9);
+  border-radius:0.5em 0 0 0;
+  cursor:pointer;
+}
+
+.optionswrapper {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  .flex;
+  .align-items(center);
+  .justify-content(center);
+  .transparency(0);
+  z-index:-1;
+  .transition(all 0.4s);
+
+  &.shown {
+    .transparency(1);
+    z-index:10;
+  }
+
+  .mask {
+    z-index:1;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+  }
+  .options {
+    z-index:2;
+    padding:1em;
+    background:@white;
+    box-shadow:0 0 10px rgba(0,0,0,0.9);
+    border-radius:0.5em;
+    input,
+    select {
+      float:right;
+      padding:0.2em;
+      width:4em;
+      margin-left:1em;
+      border:solid 1px #333333;
     }
-
-    body {
-        font-family:Arial, Verdana, sans-serif;
-        font-size: 100%;
-		background:@white;
-        color:@black;
-        .transition( all 0.3s );
-		&.solved {
-			background:@black;
-		}
+    select {
+      width:auto;
     }
-
-    .canvaswrapper {
-		.flex;
-		.align-items(center);
-		.justify-content(center);
-		margin:20px;
-		height:calc(~'100vh - 40px');
-		.border-box;
-
-		.canvas {
-			box-shadow:0 0 10px rgba(0,0,0,0.2);
-			background:silver;
-		}
-	}
-	
-	.optionstrigger {
-        position:fixed;
-        bottom:0;
-        right:0;
-        padding:0.5em;
-        background:@white;
-        width:2em;
-        height:2em;
-  		box-shadow:0 0 10px rgba(0,0,0,0.9);
-  		border-radius:0.5em 0 0 0;
-  		cursor:pointer;
+    input[type="file"]{
+      width:180px;
     }
-
-	.optionswrapper {
-		position:fixed;
-		top:0;
-		left:0;
-		width:100%;
-		height:100vh;
-		.flex;
-		.align-items(center);
-		.justify-content(center);
-		.transparency(0);
-		z-index:-1;
-		.transition(all 0.4s);
-
-		&.shown {
-    		.transparency(1);
-    		z-index:10;
-        }
-
-		.mask {
-            z-index:1;
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.5);
-        }
-    	.options {
-            z-index:2;
-    		padding:1em;
-    		background:@white;
-    		box-shadow:0 0 10px rgba(0,0,0,0.9);
-    		border-radius:0.5em;
-    		input,
-            select {
-                float:right;
-    			padding:0.2em;
-    			width:4em;
-    			margin-left:1em;
-    			border:solid 1px #333333;
-    		}
-    		select {
-                width:auto;
-            }
-    		input[type="file"]{
-                width:180px;
-            }
-    		label {
-                display:block;
-                padding:0.5em 0;
-                .clearfix;
-            }
-    	}
+    label {
+      display:block;
+      padding:0.5em 0;
+      .clearfix;
     }
+  }
+}
 
 
 

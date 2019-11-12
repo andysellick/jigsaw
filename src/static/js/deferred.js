@@ -16,10 +16,10 @@
 
 	function D(fn) {
 		var status = 'pending',
-			doneFuncs = [],
-			failFuncs = [],
-			progressFuncs = [],
-			resultArgs = null,
+		doneFuncs = [],
+		failFuncs = [],
+		progressFuncs = [],
+		resultArgs = null,
 
 		promise = {
 			done: function() {
@@ -49,7 +49,7 @@
 						doneFuncs.push(arguments[i]);
 					}
 				}
-				
+
 				return this;
 			},
 
@@ -80,7 +80,7 @@
 						failFuncs.push(arguments[i]);
 					}
 				}
-				
+
 				return this;
 			},
 
@@ -111,7 +111,7 @@
 						}
 					}
 				}
-				
+
 				return this;
 			},
 
@@ -184,7 +184,7 @@
 						if (typeof func === 'function') {
 							deferred.fail(function() {
 								var returnval = func.apply(this, arguments);
-								
+
 								if (returnval && typeof returnval === 'function') {
 									returnval.promise().then(def.resolve, def.reject, def.notify);
 								} else {
@@ -259,7 +259,7 @@
 		if (arguments.length < 2) {
 			var obj = arguments.length ? arguments[0] : undefined;
 			if (obj && (typeof obj.isResolved === 'function' && typeof obj.isRejected === 'function')) {
-				return obj.promise();			
+				return obj.promise();
 			}
 			else {
 				return D().resolve(obj).promise();
@@ -268,24 +268,24 @@
 		else {
 			return (function(args){
 				var df = D(),
-					size = args.length,
-					done = 0,
-					rp = new Array(size);	// resolve params: params of each resolve, we need to track down them to be able to pass them in the correct order if the master needs to be resolved
+				size = args.length,
+				done = 0,
+				rp = new Array(size);	// resolve params: params of each resolve, we need to track down them to be able to pass them in the correct order if the master needs to be resolved
 
 				for (var i = 0; i < args.length; i++) {
 					(function(j) {
-                        var obj = null;
-                        
-                        if (args[j].done) {
-                            args[j].done(function() { rp[j] = (arguments.length < 2) ? arguments[0] : arguments; if (++done == size) { df.resolve.apply(df, rp); }})
-                            .fail(function() { df.reject(arguments); });
-                        } else {
-                            obj = args[j];
-                            args[j] = new Deferred();
-                            
-                            args[j].done(function() { rp[j] = (arguments.length < 2) ? arguments[0] : arguments; if (++done == size) { df.resolve.apply(df, rp); }})
-                            .fail(function() { df.reject(arguments); }).resolve(obj);
-                        }
+						var obj = null;
+
+						if (args[j].done) {
+							args[j].done(function() { rp[j] = (arguments.length < 2) ? arguments[0] : arguments; if (++done == size) { df.resolve.apply(df, rp); }})
+							.fail(function() { df.reject(arguments); });
+						} else {
+							obj = args[j];
+							args[j] = new Deferred();
+
+							args[j].done(function() { rp[j] = (arguments.length < 2) ? arguments[0] : arguments; if (++done == size) { df.resolve.apply(df, rp); }})
+							.fail(function() { df.reject(arguments); }).resolve(obj);
+						}
 					})(i);
 				}
 
