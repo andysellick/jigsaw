@@ -56,13 +56,16 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 	this.rowy = rowy;
 }
 
-
 (function( window, undefined ) {
 	var js = {
 		canvas: 0,
 		ctx: 0,
 		canvasw: 0,
 		canvash: 0,
+		canvasTopLeft: 0,
+		canvasTopRight: 0,
+		canvasBottomLeft: 0,
+		canvasBottomRight: 0,
 		savedcanvasw: 0,
 		savedcanvash: 0,
 		idealw: 1, //gets set later based on image size
@@ -89,6 +92,7 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 					setInterval(js.general.drawPieces,10);
 				}
 			},
+
 			initPuzzle: function(){
 				js.puzzle = allimages[0].images[0];
 				js.idealw = js.puzzle.width;
@@ -120,6 +124,7 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 					js.canvas.height = (js.idealh / 100) * scaleh;
 				}
 			},
+
 			//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio
 			calculateAspectRatio: function(idealw,idealh,parentw,parenth){
 				var aspect = Math.floor((parenth / idealh) * idealw);
@@ -129,13 +134,16 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				var h = (w / idealw) * idealh;
 				return([w,h]);
 			},
+
 			//returns the percentage amount that object is of wrapper
 			calculatePercentage: function(object,wrapper){
 				return((100 / wrapper) * object);
 			},
+
 			clearCanvas: function(){
 				js.canvas.width = js.canvas.width; //this is apparently a hack but seems to work
 			},
+
 			resizeCanvas: function(){
 				js.general.initCanvasSize();
 				var diffx = (js.canvasw / js.savedcanvasw) * 100;
@@ -159,28 +167,27 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				js.savedcanvasw = js.canvasw;
 				js.savedcanvash = js.canvash;
 			},
+
 			resetPuzzle: function(){
 				document.getElementById('options').className = 'optionswrapper';
 				document.getElementById('body').className = '';
 				js.general.initPuzzle();
 			},
+
 			randomNumber: function(min,max){
 				return((Math.random() * (max - min) + min));
 			},
-
 
 			//click events
 			setupEvents: function(){
 				var ondown = ((document.ontouchstart!==null)?'mousedown':'touchstart');
 				js.canvas.addEventListener(ondown,function(e){
-					//console.log('click down');
 					var clicked = js.general.clickDown(e);
 					js.general.clickPiece(clicked[0],clicked[1]);
 				},false);
 
 				var onup = ((document.ontouchstart!==null)?'mouseup':'touchend');
 				js.canvas.addEventListener(onup,function(e){
-					//console.log('click up');
 					js.general.releasePiece();
 				},false);
 
@@ -208,7 +215,6 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				document.getElementById('resetPuzzle').addEventListener(reset,function(e){
 					js.general.resetPuzzle();
 				},false);
-
 			},
 
 			//find where on the canvas the mouse/touch is
@@ -220,7 +226,6 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 					x = e.changedTouches[0].pageX - rect.left;
 					y = e.changedTouches[0].pageY - rect.top;
 				}
-				//console.log(x,y);
 				return([x,y]);
 			},
 
@@ -246,13 +251,12 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 					js.pieces.splice(js.clickedpiece,1);
 					js.pieces.push(tmp);
 
-
 					for(var p = 0; p < js.pieces.length; p++){
 						js.pieces[p].visible = 1;
 					}
 					js.pieces[js.clickedpiece].offsetx = 0;
 					js.pieces[js.clickedpiece].offsety = 0;
-					js.general.checkSolved();
+					js.general.checkSolved(js.pieces[js.clickedpiece]);
 					js.clickedpiece = -1;
 
 					if(js.pieces.length === 0){
@@ -264,29 +268,32 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 			//once selected, move a piece with the mouse
 			movePiece: function(e){
 				var movement = js.general.clickDown(e);
-				js.pieces[js.clickedpiece].x = movement[0] - js.pieces[js.clickedpiece].offsetx;
-				js.pieces[js.clickedpiece].y = movement[1] - js.pieces[js.clickedpiece].offsety;
+				var thispiece = js.pieces[js.clickedpiece];
+				var posx = movement[0] - thispiece.offsetx;
+				var posy = movement[1] - thispiece.offsety;
+				// limit the movement to within the canvas frame
+				var x = Math.min(Math.max(0, posx), js.canvasw - thispiece.w);
+				var y = Math.min(Math.max(0, posy), js.canvash - thispiece.h);
+				thispiece.x = x;
+				thispiece.y = y;
 			},
 
 			//once finished moving a piece, check to see if it is in place
-			checkSolved: function(){
-				//console.log(js.pieces[js.clickedpiece].x,js.pieces[js.clickedpiece].solvedx);
-
-				var newx = js.pieces[js.clickedpiece].x;
-				var newy = js.pieces[js.clickedpiece].y;
-				var sx = js.pieces[js.clickedpiece].solvedx;
-				var sy = js.pieces[js.clickedpiece].solvedy;
+			checkSolved: function(thispiece){
+				var newx = thispiece.x;
+				var newy = thispiece.y;
+				var sx = thispiece.solvedx;
+				var sy = thispiece.solvedy;
 
 				var tolerance = 30;
-				//console.log(newx,sx);
 
 				//if the piece is solved
-				if(Math.abs(newx - sx) < tolerance && Math.abs(newy - sy) < tolerance){
-					js.pieces[js.clickedpiece].x = sx;
-					js.pieces[js.clickedpiece].y = sy;
-					js.pieces[js.clickedpiece].solved = 1;
+				if(Math.abs(newx - sx) <= tolerance && Math.abs(newy - sy) <= tolerance){
+					thispiece.x = sx;
+					thispiece.y = sy;
+					thispiece.solved = 1;
 
-					var tmp = js.pieces[js.clickedpiece];
+					var tmp = thispiece;
 					//remove the piece from the array of pieces and add to the solved array
 					//means we can always draw the solved pieces first, beneath the unsolved
 					js.pieces.splice(js.clickedpiece,1);
@@ -329,11 +336,10 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				var down = Math.min(20,elDown.value);
 
 				var file = document.getElementById('fileupload').files[0];
-				//console.log(file);
+
 				if(typeof file !== 'undefined'){
 					var reader = new FileReader();
 					reader.onload = function(){
-						//console.log(reader.result);
 						var img = new Image();
 						img.src = reader.result;
 						img.onload = function(){
@@ -363,7 +369,6 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 			},
 
 			hideAllPieces: function(){
-				//console.log('hideAllPieces');
 				for(var p = 0; p < js.pieces.length; p++){
 					js.pieces[p].visible = 0;
 				}
@@ -480,7 +485,7 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				}
 
 				if(!obj.visible){
-					js.ctx.globalAlpha = 0.3;
+					js.ctx.globalAlpha = 0.1;
 				}
 
 				js.ctx.beginPath();
