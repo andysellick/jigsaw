@@ -246,17 +246,20 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 			//let go of the current piece
 			releasePiece: function(){
 				if(js.clickedpiece !== -1){
-					//move selected piece to the end of the array - makes last touched piece always be on top
-					var tmp = js.pieces[js.clickedpiece];
-					js.pieces.splice(js.clickedpiece,1);
-					js.pieces.push(tmp);
-
 					for(var p = 0; p < js.pieces.length; p++){
 						js.pieces[p].visible = 1;
 					}
 					js.pieces[js.clickedpiece].offsetx = 0;
 					js.pieces[js.clickedpiece].offsety = 0;
-					js.general.checkSolved(js.pieces[js.clickedpiece]);
+					var solved = js.general.checkSolved(js.pieces[js.clickedpiece]);
+
+					if (!solved) {
+						//move selected piece to the end of the array - makes last touched piece always be on top
+						var tmp = js.pieces[js.clickedpiece];
+						js.pieces.splice(js.clickedpiece,1);
+						js.pieces.push(tmp);
+					}
+
 					js.clickedpiece = -1;
 
 					if(js.pieces.length === 0){
@@ -280,15 +283,17 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 
 			//once finished moving a piece, check to see if it is in place
 			checkSolved: function(thispiece){
+				var solved = 0;
 				var newx = thispiece.x;
 				var newy = thispiece.y;
 				var sx = thispiece.solvedx;
 				var sy = thispiece.solvedy;
 
-				var tolerance = 30;
+				var tolerance = 20;
 
 				//if the piece is solved
 				if(Math.abs(newx - sx) <= tolerance && Math.abs(newy - sy) <= tolerance){
+					solved = 1;
 					thispiece.x = sx;
 					thispiece.y = sy;
 					thispiece.solved = 1;
@@ -299,6 +304,7 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 					js.pieces.splice(js.clickedpiece,1);
 					js.solvedpieces.push(tmp);
 				}
+				return solved;
 			},
 
 			checkCollision: function(obj,x,y){
