@@ -113,16 +113,20 @@ function NewPiece(x,y,w,h,solvedx,solvedy,spritex,spritey,rowx,rowy){
 				var targetw = parentel.offsetWidth;
 				var targeth = parentel.offsetHeight;
 
-				if(js.canvasmode === 1){ //resize the canvas to maintain aspect ratio depending on screen size (may result in gaps either side) - we're using this one
-					var sizes = js.general.calculateAspectRatio(js.idealw,js.idealh,targetw,targeth);
-					js.canvas.width = js.canvasw = sizes[0];
-					js.canvas.height = js.canvash = sizes[1];
+				var sizes = js.general.calculateAspectRatio(js.idealw,js.idealh,targetw,targeth);
+				js.canvas.width = js.canvasw = sizes[0];
+				js.canvas.height = js.canvash = sizes[1];
+				/*
+				//resize the canvas to maintain aspect ratio depending on screen size (may result in gaps either side) - we're using this one
+				if(js.canvasmode === 1){
 				}
-				else { //make canvas always full width, with appropriately scaled height (may go off bottom of page)
+				//make canvas always full width, with appropriately scaled height (may go off bottom of page)
+				else {
 					js.canvas.width = targetw;
 					var scaleh = js.general.calculatePercentage(targetw,js.idealw);
 					js.canvas.height = (js.idealh / 100) * scaleh;
 				}
+				*/
 			},
 
 			//given a width and height representing an aspect ratio, and the size of the containing thing, return the largest w and h matching that aspect ratio

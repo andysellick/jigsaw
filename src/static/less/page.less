@@ -21,7 +21,7 @@ body {
   .flex;
   .align-items(center);
   .justify-content(center);
-  margin:20px;
+  margin: 10px;
   height:calc(~'100vh - 40px');
   .border-box;
 
@@ -39,9 +39,16 @@ body {
   background:@white;
   width:2em;
   height:2em;
-  box-shadow:0 0 10px rgba(0,0,0,0.9);
-  border-radius:0.5em 0 0 0;
   cursor:pointer;
+  .transparency(0.6);
+
+  &:hover {
+    .transparency(1);
+  }
+
+  img {
+    max-width:100%;
+  }
 }
 
 .optionswrapper {
@@ -73,36 +80,49 @@ body {
   }
   .options {
     z-index:2;
+    min-width: 50px;
     padding:1em;
     background:@white;
-    box-shadow:0 0 10px rgba(0,0,0,0.9);
-    border-radius:0.5em;
-    input,
-    select {
-      float:right;
-      padding:0.2em;
-      width:4em;
-      margin-left:1em;
-      border:solid 1px #333333;
-    }
-    select {
-      width:auto;
-    }
-    input[type="file"]{
-      width:180px;
-    }
-    label {
-      display:block;
-      padding:0.5em 0;
-      .clearfix;
-    }
+    border-radius: 2px;
   }
 }
 
-
-
-@media @tabletWidth{
+.inputwrap {
+  padding:0.5em 0;
+  label {
+    padding: 0 0 1em 0;
+    display: block;
+  }
 }
 
-@media @mobileWidth{
+.forminput {
+  padding:0.2em;
+  width:4em;
+  border:solid 1px #333333;
+  font-size: 1.3em;
+
+  &:focus {
+    outline: solid 3px black;
+  }
+}
+
+.fileinput {
+  .border-box;
+  width: 100%;
+  font-size: 1.3em;
+  padding: 0.3em;
+  border:solid 1px #333333;
+
+  &:focus {
+    outline: solid 3px black;
+  }
+}
+
+.btnwrapper {
+  padding-top: 1em;
+  text-align: center;
+}
+
+.aboutlink {
+  text-align: center;
 }

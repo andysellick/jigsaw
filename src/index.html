@@ -39,19 +39,37 @@
   <div id="options" class="optionswrapper">
     <div class="mask" id="hideoptions"></div>
     <div class="options">
-      <h1 class="h3 align-center">Jigsaw</h1>
-      <h2 class="h4 align-center">Options</h2>
-      <label>
-        Across: <input type="number" id="piecesx"/>
-      </label>
-      <label>
-        Down: <input type="number" id="piecesy"/>
-      </label>
-      <label>
-        Image: <input type="file" id="fileupload"/>
-      </label>
-      <button type="submit" id="updatePuzzle" class="btn btn-block">Update</button>
-      <button type="submit" id="resetPuzzle" class="btn btn-block">Reset</button>
+      <h1>Jigsaw options</h1>
+
+      <div class="inputwrap">
+        <label for="piecesx">
+          Number of pieces across:
+        </label>
+        <input type="number" id="piecesx" class="forminput"/>
+      </div>
+
+      <div class="inputwrap">
+        <label for="piecesy">
+          Number of pieces down:
+        </label>
+        <input type="number" id="piecesy" class="forminput"/>
+      </div>
+
+      <div class="inputwrap">
+        <label for="fileupload">
+          Jigsaw image to use:
+        </label>
+        <input type="file" id="fileupload" class="fileinput"/>
+      </div>
+
+      <div class="btnwrapper">
+        <button type="submit" id="updatePuzzle" class="btn btn-primary">Use these settings</button>
+        <button type="submit" id="resetPuzzle" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <div class="aboutlink">
+        <a href="https://www.custarddoughnuts.co.uk/article/2017/3/9/javascript-jigsaw-puzzle">About</a>
+      </div>
     </div>
   </div>
 
